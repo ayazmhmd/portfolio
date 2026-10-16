@@ -1,0 +1,15 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ YAML_SECTIONS[key] }}{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('admin.dashboard') }}">← Dashboard</a></p>
+<h1>{{ YAML_SECTIONS[key] }}</h1>
+<form method="post" enctype="multipart/form-data" class="card">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <p class="hint">Edit the text below and save. Keep the same indentation (two spaces) and the <code>- </code> at the start of list items. If something is wrong you'll get an error and nothing is lost; every save also keeps a backup in <code>instance/backups</code>.</p>
+  <textarea name="yaml" rows="30" class="mono" spellcheck="false">{{ text }}</textarea>
+  {% if key == 'proposal' %}
+  <label>Upload full proposal (PDF)<input type="file" name="pdf" accept="application/pdf"></label>
+  {% endif %}
+  <div class="savebar"><button class="primary">Save</button></div>
+</form>
+{% endblock %}

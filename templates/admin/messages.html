@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+{% block title %}Messages{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('admin.dashboard') }}">← Dashboard</a>{% if issues_url %} · <a href="{{ issues_url }}" target="_blank">Open on GitHub ↗</a>{% endif %}</p>
+<h1>Messages ({{ msgs|length }})</h1>
+{% if issues_url %}<p class="hint">On Vercel, messages are saved as GitHub issues in your repository with the label "contact", so GitHub also emails you about each one.</p>{% endif %}
+{% for m in msgs %}
+<section class="card">
+  <p><b>{{ m.title }}</b> <span class="hint"> · {{ (m.received or '')[:16]|replace('T',' ') }} UTC{% if m.state == 'closed' %} · closed{% endif %}</span></p>
+  <p class="pre">{{ m.body }}</p>
+  {% if m.url %}<a class="btn" href="{{ m.url }}" target="_blank">Open on GitHub</a>{% endif %}
+  {% if m.email %}<a class="btn" href="mailto:{{ m.email }}">Reply by email</a>{% endif %}
+</section>
+{% else %}
+<p>No messages yet.</p>
+{% endfor %}
+{% endblock %}

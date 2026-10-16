@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% import "_diagrams.html" as dg with context %}
+{% block title %}{{ p.title }} | {{ site.profile.name }}{% endblock %}
+{% block content %}
+<article class="paper">
+  <p class="crumb"><a href="{{ url_for('research') }}">Research</a> / {{ p.group or STATUS.get(p.status, '') }}
+    {% if is_admin %}<a class="edit" href="{{ url_for('admin.edit_project', slug=p.slug) }}">edit this page</a>{% endif %}</p>
+  <h1>{{ p.title }}</h1>
+  {% if p.authors %}<p class="pub-authors">{{ p.authors|me }}</p>{% endif %}
+  <p class="pub-venue">
+    {% if p.venue and p.venue != 'Manuscript' %}<i>{{ p.venue }}</i>{% if p.year %}, {{ p.year }}{% endif %}{% endif %}
+    <span class="status">({{ STATUS.get(p.status, p.status) }})</span>
+    {% if p.citations %}<span class="muted">· cited by {{ p.citations }}</span>{% endif %}
+  </p>
+  {% if p.links or p.documents %}
+  <p class="pub-links big">
+    {% for k, v in (p.links or {}).items() %}[<a href="{{ v }}">{{ LINK_LABELS.get(k, k) }}</a>] {% endfor %}
+    {% for d in p.documents or [] %}[<a href="{{ d.file|asset(p.slug) }}">{{ d.label }}</a>] {% endfor %}
+  </p>
+  {% endif %}
+
+  {% if p.short %}<p class="abstract">{{ p.short }}</p>{% endif %}
+
+  {% if p.highlights %}
+  <div class="stats">
+    {% for h in p.highlights %}<div class="stat"><span class="v">{{ h.value }}</span><span class="l">{{ h.label }}</span></div>{% endfor %}
+  </div>
+  {% endif %}
+
+  {% if p.problem %}<h2>Motivation</h2>{{ p.problem|paras }}{% endif %}
+
+  {% macro figgrid(figs) %}
+  <div class="figgrid{% if figs|length == 1 %} single{% endif %}">
+    {% for n, f in figs %}
+    <figure class="zoomable{{ ' wide' if f.wide }}" tabindex="0" data-full="{{ f.file|asset(p.slug) }}"
+            data-caption="Figure {{ n }}. {{ f.caption }}" data-desc="{{ f.description or '' }}">
+      <div class="imgbox"><img src="{{ f.file|asset(p.slug) }}" alt="{{ f.caption }}" loading="lazy"></div>
+      <figcaption><b>Figure {{ n }}.</b> {{ f.caption }}</figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+  {% endmacro %}
+  {% set method_figs = fig_groups.pop('Method', []) %}
+  {% set result_figs = fig_groups.pop('Results', []) %}
+
+  {% if p.diagram or p.approach or method_figs %}
+  <h2>Method</h2>
+  {% if p.diagram %}
+  <figure class="zoomable diagram" data-caption="Overview of the method" tabindex="0">
+    {{ dg.diagram(p.diagram) }}
+    <figcaption>Overview of the method. <span class="hint">Click to enlarge.</span></figcaption>
+  </figure>
+  {% endif %}
+  {% if p.approach %}
+  <ol class="steps">{% for s in p.approach %}<li>{% if s.title %}<b>{{ s.title }}.</b> {% endif %}{{ s.text }}</li>{% endfor %}</ol>
+  {% endif %}
+  {% if method_figs %}<p class="h-hint">Click any figure to enlarge it and read the details.</p>{{ figgrid(method_figs) }}{% endif %}
+  {% endif %}
+
+  {% set tables = project_tables(p) %}
+  {% if tables or p.results_note or result_figs %}
+  <h2>Results</h2>
+  {% for t in tables %}
+  {% if t.caption %}<p class="tcap">Table {{ loop.index }}. {{ t.caption }}</p>{% endif %}
+  <div class="tablewrap"><table class="results">
+    <thead><tr>{% for h in t.header %}<th>{{ h }}</th>{% endfor %}</tr></thead>
+    <tbody>{% for r in t.rows %}<tr>{% for c in r %}<td>{{ c }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+  </table></div>
+  {% endfor %}
+  {% if p.results_note %}<p class="note">{{ p.results_note }}</p>{% endif %}
+  {% if result_figs %}{{ figgrid(result_figs) }}{% endif %}
+  {% endif %}
+
+  {% for group, figs in fig_groups.items() %}
+  <h2>{{ group }}</h2>
+  {{ figgrid(figs) }}
+  {% endfor %}
+
+  {% if p.details %}<div class="prose">{{ p.details|markdown }}</div>{% endif %}
+
+  {% if p.contribution %}<h2>My role</h2><p>{{ p.contribution }}</p>{% endif %}
+
+  {% if p.tags %}<p class="small muted keywords">Keywords: {{ p.tags|join(', ') }}</p>{% endif %}
+
+  <p class="ask">Questions about this work, or want to discuss it? <a href="{{ url_for('contact') }}?about={{ p.slug }}">Write to me</a>.</p>
+
+  <nav class="pager">
+    {% if prev_p %}<a href="{{ url_for('project', slug=prev_p.slug) }}">← {{ prev_p.title|truncate(60) }}</a>{% else %}<span></span>{% endif %}
+    {% if next_p %}<a href="{{ url_for('project', slug=next_p.slug) }}">{{ next_p.title|truncate(60) }} →</a>{% endif %}
+  </nav>
+</article>
+{% endblock %}

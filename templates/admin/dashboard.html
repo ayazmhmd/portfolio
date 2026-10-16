@@ -1,0 +1,56 @@
+{% extends "admin/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<p class="storage">Storage: <b>{{ 'GitHub (' ~ storage.repo ~ ')' if storage.name == 'github' else 'this computer' }}</b>. {{ storage.live_note }}</p>
+
+<section class="card" id="projects">
+  <div class="head"><h2>Projects and papers</h2><a class="btn primary" href="{{ url_for('admin.edit_project') }}">+ Add a project</a></div>
+  <p class="hint">The order here is the order on the site. Click a title to edit its text, figures, results and files.</p>
+  <table class="list">
+    <thead><tr><th>Title</th><th>Status</th><th>Figures</th><th></th></tr></thead>
+    <tbody>
+    {% for p in data.projects %}
+      <tr>
+        <td><a href="{{ url_for('admin.edit_project', slug=p.slug) }}"><b>{{ p.title|truncate(90) }}</b></a><br><span class="hint">{{ p.venue }} {{ p.year }}</span></td>
+        <td><span class="st st-{{ p.status }}">{{ p.status|replace('_',' ') }}</span></td>
+        <td>{{ (p.figures or [])|length }}</td>
+        <td class="actions">
+          <form method="post" action="{{ url_for('admin.move_project', slug=p.slug, direction='up') }}" class="inline"><input type="hidden" name="csrf" value="{{ csrf }}"><button title="Move up" {{ 'disabled' if loop.first }}>↑</button></form>
+          <form method="post" action="{{ url_for('admin.move_project', slug=p.slug, direction='down') }}" class="inline"><input type="hidden" name="csrf" value="{{ csrf }}"><button title="Move down" {{ 'disabled' if loop.last }}>↓</button></form>
+          <a class="btn" href="{{ url_for('project', slug=p.slug) }}" target="_blank">View</a>
+          <form method="post" action="{{ url_for('admin.delete_project', slug=p.slug) }}" class="inline" onsubmit="return confirm('Delete this project and its files?');"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="danger">Delete</button></form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section class="card" id="news">
+  <h2>News</h2>
+  <form method="post" action="{{ url_for('admin.add_news') }}" class="row">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <input name="date" placeholder="e.g. Nov 2026" required style="max-width:140px">
+    <input name="text" placeholder="e.g. Paper accepted at IEEE Access." required>
+    <button class="primary">Add</button>
+  </form>
+  <table class="list">
+    {% for n in data.news %}
+    <tr><td style="width:120px">{{ n.date }}</td><td>{{ n.text }}</td>
+      <td class="actions"><form method="post" action="{{ url_for('admin.delete_news', i=loop.index0) }}" class="inline"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="danger">Remove</button></form></td></tr>
+    {% endfor %}
+  </table>
+  <p class="hint">The home page shows the 6 most recent items.</p>
+</section>
+
+<section class="card" id="pages">
+  <h2>Other pages</h2>
+  <ul class="links">
+    <li><a href="{{ url_for('admin.documents') }}">Documents (CV, transcripts, degree, letters) and private links</a></li>
+    <li><a href="{{ url_for('admin.profile') }}">Profile, bio, photo and contact details</a></li>
+    {% for k, label in YAML_SECTIONS.items() %}<li><a href="{{ url_for('admin.section', key=k) }}">{{ label }}</a></li>{% endfor %}
+    <li><a href="{{ url_for('admin.messages') }}">Messages from the contact form</a></li>
+  </ul>
+</section>
+{% endblock %}

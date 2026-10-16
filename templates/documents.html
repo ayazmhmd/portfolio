@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Documents | {{ site.profile.name }}{% endblock %}
+{% block content %}
+<h1>Documents</h1>
+{% if share or is_admin %}
+<p>All documents are available below{% if share %} through your private link{% endif %}. Each opens in the browser and can be downloaded.</p>
+{% else %}
+<p>My CV is public. Transcripts and degree certificates are shared with supervisors and admissions committees on request.
+  <a href="{{ url_for('contact') }}?kind=PhD+position">Ask for access</a> and I'll send you a private link.</p>
+{% endif %}
+
+<ul class="doclist">
+  {% for d in site.documents %}
+  {% set open = can_see(d) %}
+  <li class="{{ '' if open else 'locked' }}">
+    <span class="kind">{{ DOC_KINDS.get(d.kind, 'Document') }}</span>
+    <span class="dtitle">
+      {% if open %}<a href="{{ url_for('document_file', doc_id=d.id, name=d.file) }}">{{ d.title }}</a>{% else %}{{ d.title }}{% endif %}
+      {% if d.note %}<span class="muted small"> · {{ d.note }}</span>{% endif %}
+    </span>
+    <span class="dact">
+      {% if open %}<a href="{{ url_for('document_file', doc_id=d.id, name=d.file) }}?download=1">download</a>
+      {% else %}<span class="muted small">on request</span>{% endif %}
+    </span>
+  </li>
+  {% endfor %}
+</ul>
+
+{% if site.references %}
+<h2>References</h2>
+<dl class="cvlist">
+  {% for r in site.references %}
+  <dt>{{ r.role }}</dt>
+  <dd><b>{{ r.name }}</b>, {{ r.org }}
+    {% if (share or is_admin) and r.email %}<br><a href="mailto:{{ r.email }}">{{ r.email }}</a>{% endif %}</dd>
+  {% endfor %}
+</dl>
+{% if not (share or is_admin) %}<p class="muted small">Contact details for references are included with the private link.</p>{% endif %}
+{% endif %}
+{% endblock %}

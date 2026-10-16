@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>{% block title %}Admin{% endblock %} · {{ site.profile.name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+  {% if session.admin %}
+  <header class="bar">
+    <a class="home" href="{{ url_for('admin.dashboard') }}">Site admin</a>
+    <nav>
+      <a href="{{ url_for('admin.dashboard') }}#projects">Projects</a>
+      <a href="{{ url_for('admin.edit_project') }}">+ New project</a>
+      <a href="{{ url_for('admin.documents') }}">Documents</a>
+      <a href="{{ url_for('admin.profile') }}">Profile</a>
+      <a href="{{ url_for('admin.dashboard') }}#news">News</a>
+      <a href="{{ url_for('admin.dashboard') }}#pages">Other pages</a>
+      <a href="{{ url_for('admin.messages') }}">Messages</a>
+      <a href="{{ url_for('home') }}" target="_blank">View site ↗</a>
+      <form method="post" action="{{ url_for('admin.logout') }}" class="inline"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="link">Log out</button></form>
+    </nav>
+  </header>
+  {% endif %}
+  <main class="wrap">
+    {% if session.admin and weak_password %}
+    <p class="flash error">You're using the default password. Set the <code>ADMIN_PASSWORD</code> environment variable before putting the site online.</p>
+    {% endif %}
+    {% with msgs = get_flashed_messages(with_categories=true) %}
+      {% for cat, m in msgs %}<p class="flash {{ cat }}">{{ m }}</p>{% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

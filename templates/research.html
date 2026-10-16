@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "_pub.html" import entry with context %}
+{% block title %}Research | {{ site.profile.name }}{% endblock %}
+{% block content %}
+<h1>Research</h1>
+<p>Each project has its own page with the motivation, method, figures (click any figure for details) and results.</p>
+{% if site.notebook and site.notebook.html %}<p class="callout"><b>Notebook.</b> {{ site.notebook.text }} <a href="{{ url_for('notebook') }}">Open it</a>{% if site.notebook.ipynb %} or <a href="{{ url_for('static', filename=site.notebook.ipynb) }}">download the .ipynb</a>{% endif %}.</p>{% endif %}
+{% for heading, statuses in GROUPS %}
+  {% set items = site.projects|selectattr('status', 'in', statuses)|list %}
+  {% if items %}
+  <h2>{{ heading }}</h2>
+  {% for p in items %}{{ entry(p) }}{% endfor %}
+  {% endif %}
+{% endfor %}
+{% if site.other_projects %}
+<h2>Other projects</h2>
+<ul>{% for o in site.other_projects %}<li>{{ o }}</li>{% endfor %}</ul>
+{% endif %}
+{% endblock %}

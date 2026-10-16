@@ -1,0 +1,816 @@
+# Site content. Edit from /admin or by hand.
+profile:
+  name: Ayaz Mehmood
+  title: AI researcher in medical imaging · MS Data Science, NUST
+  location: Islamabad, Pakistan
+  photo: ''
+  status: I am looking for a fully funded PhD position in trustworthy medical imaging and multimodal clinical
+    AI.
+  bio:
+  - I work on medical imaging models that hold up outside the dataset they were trained on. My MS thesis
+    at NUST, supervised by Dr. M. Daud Abdullah Asif, studied breast-level classification from dual-view
+    mammograms. One paper reads both views with a single encoder and grounds the decision in prototypes
+    for radiological findings and BI-RADS categories. The other adapts the DINOv2 foundation model with
+    routed low-rank experts and multi-head MIL. Both are tested on external datasets, with stratified
+    analyses by imaging device and breast density.
+  - At Klarity I build clinical risk models on longitudinal EHR and insurance data, covering five-year
+    cancer risk, chronic disease, biological age and mortality. My current side projects are cross-device
+    harmonisation of mammograms and H&E-to-IHC virtual staining with flow matching.
+  - I graduated first in my class in Computer Systems Engineering at UET Peshawar (CGPA 3.74), and completed
+    my MS in Data Science at NUST with a CGPA of 3.60.
+  interests:
+  - medical imaging
+  - domain shift and harmonisation
+  - generative models (diffusion, flow matching)
+  - prototype-based explainability
+  - vision-language models
+  - longitudinal clinical risk prediction
+  cv_pdf: files/Ayaz_Mehmood_CV.pdf
+contact:
+  email: ayazmehmood550@gmail.com
+  linkedin: https://www.linkedin.com/in/ayaz-mehmood-5b941219a
+  github: https://github.com/ayazmhmd
+  google_scholar: https://scholar.google.com/citations?user=oBK_VbQAAAAJ
+  kaggle: ''
+  orcid: ''
+  whatsapp: '+923219872721'
+  show_whatsapp: false
+  collaboration_note: I'm glad to hear from groups working on medical imaging, generative models for pathology
+    or radiology, or clinical risk prediction, whether about a PhD position, a joint paper, or trying
+    one of my methods on your data.
+news:
+- date: Aug 2026
+  text: Awarded the MS in Data Science by NUST (CGPA 3.60).
+- date: '2026'
+  text: Submitted our five-year cancer risk paper to Cancer Epidemiology.
+- date: '2026'
+  text: Mammogram classification paper (cropping, merged views, Finding-BI-RADS prototypes) under review
+    at IEEE Access.
+- date: '2026'
+  text: Foundation-model paper (DINOv2 + routed low-rank experts + multi-head MIL) completed, ready for
+    submission.
+- date: '2025'
+  text: Took part in the SemEval-2025 shared task on LLM unlearning.
+- date: Oct 2024
+  text: Joined Klarity as a Data Scientist.
+notebook:
+  html: notebook/mammography_research_summary.html
+  ipynb: notebook/mammography_research_summary.ipynb
+  kaggle: ''
+  text: A runnable summary of my mammography experiments, including the breast-cropping algorithm step
+    by step and the result tables of both papers.
+education:
+- degree: MS Data Science
+  school: National University of Sciences & Technology (NUST), Islamabad
+  years: 2023 – 2026
+  grade: CGPA 3.60 / 4.00
+  details: 'Thesis: breast cancer classification from dual-view mammography using multi-view fusion, Finding-BI-RADS
+    prototype learning and LoRA-adapted foundation models.'
+  supervisor: Dr. M. Daud Abdullah Asif, SEECS, NUST
+- degree: BSc Computer Systems Engineering
+  school: University of Engineering & Technology (UET), Peshawar
+  years: 2018 – 2022
+  grade: CGPA 3.74 / 4.00, ranked first in class
+  details: 'Final-year project: anomaly detection from video streams using deep learning.'
+  supervisor: ''
+experience:
+  research:
+  - role: Data Scientist
+    org: Managed Self Limited (Klarity)
+    years: Oct 2024 – present
+    points:
+    - Five-year risk models for common cancers from demographic and clinical data; co-author of the manuscript
+      submitted to Cancer Epidemiology.
+    - Chronic disease progression, biological age and mortality models on longitudinal EHR and insurance
+      data.
+    - Explainable AI on EMR and longitudinal models so that outputs are interpretable for clinicians.
+  - role: Research Assistant
+    org: Medical Imaging and Diagnostic Lab, National Center of Artificial Intelligence (NCAI)
+    years: Oct 2022 – Jul 2023
+    points:
+    - Member of the team that developed the lab's first AI-based DICOM viewer.
+    - Classification, detection and segmentation models for breast cancer, tuberculosis and brain tumour
+      imaging, with radiologists.
+  - role: AI Research Scholar
+    org: Smart IoT Lab, National Center for Cyber Security (NCCS)
+    years: Apr 2022 – Oct 2022
+    points:
+    - Designed and tested AI systems for industrial applications, including real-time face-recognition
+      attendance.
+  industry:
+  - role: Data Science and Generative AI Engineer
+    org: Glowlogix; Dream Shake Media LLC (part time)
+    years: Jul 2023 – Nov 2024
+    points:
+    - Resume parser, employee-retention and applicant-suitability models, face recognition with a vector
+      database.
+    - AI backend and Flux-based custom logo generation for creativecor.com.
+references:
+- name: Dr. M. Daud Abdullah Asif
+  role: Master's thesis supervisor
+  org: School of Electrical Engineering and Computer Science (SEECS), NUST, Islamabad
+  email: daud.abdullah@seecs.edu.pk
+- name: Dr. Kashif Ahmad
+  role: Research collaborator
+  org: Munster Technological University (MTU), Ireland
+  email: kashif.ahmad@mtu.ie
+documents:
+- id: cv
+  title: Curriculum vitae
+  kind: cv
+  file: Ayaz_Mehmood_CV.pdf
+  visibility: public
+  note: Updated 2026
+- id: ms-transcript
+  title: MS Data Science transcript, NUST
+  kind: transcript
+  file: Ayaz_Mehmood_MS_Transcript_NUST.pdf
+  visibility: private
+  note: CGPA 3.60 · ID number and date of birth removed
+- id: bsc-transcript
+  title: BSc Computer Systems Engineering transcript, UET Peshawar
+  kind: transcript
+  file: Ayaz_Mehmood_BSc_Transcript_UET.pdf
+  visibility: private
+  note: CGPA 3.74
+- id: bsc-degree
+  title: BSc Computer Systems Engineering degree, UET Peshawar
+  kind: degree
+  file: Ayaz_Mehmood_BSc_Degree_UET.pdf
+  visibility: private
+  note: Conferred 29 August 2022
+share_links: []
+projects:
+- slug: mammo-multiview-prototype
+  title: Intelligent Breast Cropping and Multi-View Fusion with Finding-BI-RADS Prototype Learning for
+    Mammogram Classification
+  authors: A. Mehmood, M. D. A. Asif, P. Temdee, R. Mumtaz
+  status: under_review
+  venue: IEEE Access
+  year: 2026
+  group: MS thesis, NUST
+  short: One encoder reads both mammographic views of a breast as a single merged image, after boundary-aware
+    cropping. Two prototype memories, one for radiological findings and one for BI-RADS categories, shape
+    the embedding space during training. Trained on VinDr-Mammo, tested on INbreast without fine-tuning.
+  tags:
+  - mammography
+  - multi-view fusion
+  - prototype learning
+  - BI-RADS grading
+  - external validation
+  thumb: framework_overview.png
+  links:
+    notebook: /notebook
+  highlights:
+  - value: '0.80'
+    label: binary macro-F1 on VinDr-Mammo (ConvNeXt-Base)
+  - value: '0.76'
+    label: macro-F1 on external INbreast, no fine-tuning
+  - value: '+0.095'
+    label: external F1 gain from prototypes (EfficientNet-B3)
+  - value: ½
+    label: the FLOPs of a dual-encoder model, ~4× the throughput
+  problem: |-
+    Radiologists read each breast from two views, craniocaudal (CC) and mediolateral-oblique (MLO). Most multi-view networks copy this with two encoders, one per view, and fuse the features afterwards. That doubles the parameters and compute. These models also usually learn only a binary label, although radiologists describe what they see in terms of finding types and graded BI-RADS categories.
+
+    Fine-grained BI-RADS grading is also hard to transfer. Adjacent categories, especially 3 and 4, differ only subtly, and images vary across vendors and hospitals. I wanted to know whether a cheaper single-encoder design, plus training signals built from clinical vocabulary, would hold up on a dataset from another country and vendor.
+  approach:
+  - title: Boundary-aware cropping
+    text: Gaussian smoothing, Otsu thresholding, 5×5 morphology and the largest connected component give
+      a breast mask. A row-wise tissue-extent profile, traced from the widest row, places the upper and
+      lower boundaries where the breast stops tapering (pectoral muscle, skin folds, artefacts). The crop
+      uses no lesion annotations.
+  - title: Merged-view input
+    text: The MLO crop is flipped so that both chest walls meet in the centre, padded to the same height
+      and concatenated with the CC crop. One backbone (EfficientNet-B3 or ConvNeXt-Base) then encodes
+      the composite.
+  - title: Finding and BI-RADS prototypes
+    text: Two projection heads map features into 128-d embeddings that are pulled towards EMA-updated
+      prototypes, six for finding types and five for BI-RADS 1–5. Class-specific momentum and loss weights
+      protect rare classes. The prototypes are used only during training, so inference cost is unchanged.
+  - title: Losses
+    text: Asymmetric focal loss for the binary task, and an ordinal (CORAL-style) head with under-grading
+      penalties for five-class BI-RADS. The prototype loss is warmed up over 3 epochs, then ramped to
+      a maximum weight of 0.5.
+  - title: Evaluation
+    text: Patient-level splits on VinDr-Mammo; external test on INbreast without fine-tuning; bootstrap
+      95% CIs, McNemar and DeLong tests; three-seed variability; stratified by device, density and finding
+      type.
+  diagram: ''
+  figures:
+  - file: framework_overview.png
+    group: Method
+    caption: Overview of the framework.
+    description: Mammograms are cropped to the breast, the CC and MLO views are merged into one composite,
+      and a single encoder is trained for binary and five-class BI-RADS prediction at several input resolutions.
+    wide: true
+  - file: preprocessing_pipeline.png
+    group: Method
+    caption: Preprocessing and view merging.
+    description: Background removal and boundary-aware cropping give a tight breast ROI for each view.
+      The MLO view is flipped horizontally and concatenated with the CC view, keeping each view's native
+      aspect ratio.
+  - file: cropping_steps.png
+    group: Method
+    caption: The cropping algorithm, step by step, on two sample CC mammograms.
+    description: |-
+      A re-implementation of the paper's cropping (code in the notebook). Step 4 is the key idea. The tissue extent is measured on every row; starting from the widest row (orange), the profile is followed up and down while the breast keeps tapering. Where it stops tapering, a boundary is placed, plus a margin.
+
+      In the paper, 2,239 of 2,254 annotated lesion boxes (99.3%) stayed fully inside the crop.
+    wide: true
+  - file: model_configurations.png
+    group: Method
+    caption: Merged-view single encoder (A) versus dual-encoder two-view baseline with adaptive MLO weighting
+      (B).
+    description: The dual-encoder baseline encodes each view separately and fuses after pooling, with
+      a learned gate on the MLO branch. A shared-weight variant was also trained to separate the effect
+      of early fusion from the effect of removing the duplicated backbone.
+  - file: prototype_learning.png
+    group: Method
+    caption: Finding- and BI-RADS-aware prototype learning.
+    description: The pooled feature feeds a classifier and two projection heads. Each embedding is compared
+      with its prototype memory by temperature-scaled cosine similarity (τ = 0.1), pulling samples towards
+      their own prototypes and away from the others.
+    wide: true
+  - file: study_design.png
+    group: Method
+    caption: Study design for testing generalisation.
+    description: Models are developed on VinDr-Mammo (Vietnam, three vendors) with patient-level splits,
+      and then frozen and tested on INbreast (Portugal, Siemens). LUMINA, with multi-vendor images and
+      pathology labels, is used in the follow-up foundation-model paper.
+    wide: true
+  - file: generalization_prototypes.png
+    group: Results
+    caption: Prototypes give a small internal gain and a large external gain.
+    description: Binary macro-F1 at 512 px. On INbreast, F1 rises from 0.658 to 0.753 (EfficientNet-B3)
+      and from 0.711 to 0.758 (ConvNeXt-Base). The gain is significant on McNemar's test (p < 0.01) for
+      all four model–dataset pairs.
+    wide: true
+  - file: ablation.png
+    group: Results
+    caption: 'Ablation (ConvNeXt-Base, binary): each component, internal vs external.'
+    description: Removing the crop or using a single view lowers performance. Merged and shared two-view
+      encoders perform similarly, so merging is mainly an efficiency gain. Finding prototypes give most
+      of the external gain, and masking the MLO half at test time costs 0.065–0.157 F1.
+    wide: true
+  - file: efficiency.png
+    group: Results
+    caption: Compute and throughput at 512 px.
+    description: The merged-view model has half the parameters of the dual-encoder model and half the
+      FLOPs of both two-view models, with 4.3–4.4× higher throughput.
+    wide: true
+  - file: device_binary.png
+    group: Where it works and where it fails
+    caption: Binary F1 by imaging device (VinDr-Mammo test).
+    description: Binary performance varies less across devices than BI-RADS grading does. EfficientNet-B3
+      is weaker on Planmed Nuance.
+    wide: true
+  - file: device_birads.png
+    group: Where it works and where it fails
+    caption: Five-class BI-RADS F1 by imaging device.
+    description: Fine-grained grading is more sensitive to acquisition differences (Planmed 0.36–0.47
+      vs Mammomat 0.54–0.57). This motivates my current work on cross-device harmonisation.
+    wide: true
+  - file: density_birads.png
+    group: Where it works and where it fails
+    caption: Five-class BI-RADS F1 by breast density.
+    description: Grading degrades from density B (0.68–0.69) to density D (0.48), where dense tissue hides
+      the cues.
+    wide: true
+  - file: finding_recall.png
+    group: Where it works and where it fails
+    caption: Binary recall by radiological finding type.
+    description: Calcifications are detected most reliably (0.84–0.86). Masses and structural findings
+      are harder, and lymph nodes (n = 3) are too few to interpret.
+    wide: true
+  - file: tsne_birads.png
+    group: Where it works and where it fails
+    caption: t-SNE of the BI-RADS embedding; stars mark the learned prototypes.
+    description: The prototypes follow the severity order. BI-RADS 3, 4 and 5 lie close together, which
+      matches the low recall for the borderline categories.
+  - file: gradcam_correct.jpg
+    group: Where it works and where it fails
+    caption: Grad-CAM on correctly detected BI-RADS ≥3 breasts.
+    description: Activation falls on the lesion, in both the CC and the MLO half of the composite. Over
+      all 158 BI-RADS ≥3 test breasts, 87.3% of the activation (median 91.1%) lies inside the breast.
+    wide: true
+  - file: gradcam_failures.jpg
+    group: Where it works and where it fails
+    caption: Grad-CAM on missed BI-RADS 3–4 breasts (all density C or D).
+    description: The activation spreads over fibroglandular tissue and the predicted abnormality probability
+      is low (0.24–0.32), matching the weaker results in dense breasts.
+  tables:
+  - caption: Binary normal (BI-RADS 1) vs abnormal (2–5), macro-F1 / AUC at 512 px
+    header:
+    - Backbone
+    - Model
+    - VinDr F1
+    - VinDr AUC
+    - INbreast F1
+    - INbreast AUC
+    rows:
+    - - EfficientNet-B3
+      - Dual encoder
+      - '0.781'
+      - '0.830'
+      - '0.657'
+      - '0.916'
+    - - EfficientNet-B3
+      - Merged view
+      - '0.767'
+      - '0.816'
+      - '0.658'
+      - '0.871'
+    - - EfficientNet-B3
+      - Merged + prototypes
+      - '0.781'
+      - '0.827'
+      - '0.753'
+      - '0.909'
+    - - ConvNeXt-Base
+      - Dual encoder
+      - '0.805'
+      - '0.879'
+      - '0.696'
+      - '0.902'
+    - - ConvNeXt-Base
+      - Merged view
+      - '0.789'
+      - '0.857'
+      - '0.711'
+      - '0.910'
+    - - ConvNeXt-Base
+      - Merged + prototypes
+      - '0.801'
+      - '0.862'
+      - '0.758'
+      - '0.917'
+  - caption: Five-class BI-RADS grading at 512 px (QWK = quadratic weighted kappa)
+    header:
+    - Backbone
+    - Model
+    - VinDr F1
+    - VinDr QWK
+    - INbreast F1
+    - INbreast QWK
+    rows:
+    - - EfficientNet-B3
+      - Merged view
+      - '0.466'
+      - '0.601'
+      - '0.412'
+      - '0.682'
+    - - EfficientNet-B3
+      - Merged + prototypes
+      - '0.538'
+      - '0.637'
+      - '0.518'
+      - '0.694'
+    - - ConvNeXt-Base
+      - Merged view
+      - '0.517'
+      - '0.643'
+      - '0.516'
+      - '0.738'
+    - - ConvNeXt-Base
+      - Merged + prototypes
+      - '0.549'
+      - '0.665'
+      - '0.540'
+      - '0.784'
+  results_note: ''
+  details: |-
+    ### What I took away
+    - **Merging views is mainly an efficiency win.** The merged model matches a parameter-matched shared two-view encoder at half the compute.
+    - **Clinical structure in training helps transfer.** The prototypes add little on the training distribution but a lot on an external dataset. The effect is larger than the seed-to-seed variation (SD 0.006 macro-F1 over three seeds).
+    - **Fine-grained grading is the open problem.** BI-RADS 3 and 4 recall stays at 0.16–0.40, and 39–45 of the 91 VinDr BI-RADS 4–5 breasts are graded as 1 or 2. On INbreast, wrong predictions are often *more* confident than correct ones.
+
+    ### Limitations
+    External validation uses one small single-institution set (INbreast, 187 breasts). Merging halves each view's horizontal resolution, which may hurt calcification grading. Asymmetries, which need all four views, were excluded.
+  contribution: First author. I designed the method, wrote the code, ran all experiments and statistical
+    tests, and wrote the manuscript, under the supervision of Dr. M. Daud Abdullah Asif.
+  documents: []
+- slug: mammo-adaptive-lora
+  title: Adaptive LoRA Foundation Model Learning for Breast-Level Classification from Dual-View Mammography
+  authors: A. Mehmood et al.
+  status: ready
+  venue: Manuscript
+  year: 2026
+  group: MS thesis, NUST
+  short: MammoRLE-MIL adapts a frozen DINOv2 ViT-B/14 to mammography with routed low-rank experts on the
+    attention projections and multi-head attention MIL over patch tokens. Eight configurations are compared
+    on VinDr-Mammo and two external sets, INbreast and LUMINA.
+  tags:
+  - foundation models
+  - DINOv2
+  - LoRA
+  - mixture of experts
+  - multiple instance learning
+  - external validation
+  thumb: framework_overview.png
+  links:
+    notebook: /notebook
+  highlights:
+  - value: '0.878'
+    label: ROC-AUC on VinDr-Mammo (MoLRE-3 + ABMIL)
+  - value: '0.814'
+    label: average precision on external INbreast
+  - value: '+0.105'
+    label: AUC over frozen DINOv2 with mean pooling (p < 0.001)
+  - value: '3'
+    label: datasets; the best configuration differs on each
+  problem: |-
+    Foundation models such as DINOv2 learn strong general features, but mammography is far from natural images. Fully fine-tuning a ViT on a few thousand breasts is costly and overfits. Abnormalities also often occupy a small part of a large image, so averaging all patch features dilutes the evidence.
+
+    This paper asks two questions. Which matters more: how the frozen features are pooled, or how the backbone is adapted? And do gains on the development dataset survive a change of dataset and of label definition?
+  approach:
+  - title: Frozen DINOv2 ViT-B/14
+    text: Each view is encoded at 518×518 into 1,369 patch tokens (768-d) by one encoder shared between
+      the CC and MLO views.
+  - title: Mixture of low-rank experts (MoLRE)
+    text: K low-rank experts update the query and value projections, and a small router mixes them per
+      image. Keys are untouched. The experts and router start at zero and uniform, so training begins
+      from the original model.
+  - title: Multi-head gated-attention MIL
+    text: Several attention heads each learn a distribution over the patches. A second scoring stage weights
+      the heads, giving one embedding per view.
+  - title: Breast-level prediction
+    text: CC and MLO embeddings are concatenated (1,536-d) and classified with asymmetric focal loss.
+      The checkpoint is selected on validation AP.
+  - title: Controlled study
+    text: Eight configurations (E1–E8) share the data splits and the training recipe, varying only the
+      pooling, the number of experts and the number of heads. External tests on INbreast (BI-RADS labels)
+      and LUMINA (pathology labels) use no fine-tuning.
+  diagram: ''
+  figures:
+  - file: framework_overview.png
+    group: Method
+    caption: The MammoRLE-MIL framework.
+    description: Paired CC and MLO mammograms pass through a shared DINOv2 encoder with routed low-rank
+      experts. Their patch tokens are pooled by multi-head MIL for each view, and the two view embeddings
+      are fused for one breast-level prediction.
+    wide: true
+  - file: molre_module.png
+    group: Method
+    caption: Mixture of low-rank experts inside a frozen attention block.
+    description: The router mean-pools the tokens and outputs softmax weights over K experts. Each expert
+      proposes low-rank updates ΔQ and ΔV, which are mixed by the router weights and added to the frozen
+      projections. K is left unchanged.
+  - file: mh_mil.png
+    group: Method
+    caption: Multi-head gated-attention MIL.
+    description: Independent gated-attention heads produce different weightings of the same patch bag.
+      Learned head weights fuse them into a view-level embedding.
+  - file: study_design.png
+    group: Method
+    caption: Train on one dataset, test frozen on two others.
+    description: INbreast keeps the same BI-RADS-based label, so it tests a change of domain. LUMINA uses
+      benign vs malignant pathology labels, so it changes both the domain and the endpoint.
+    wide: true
+  - file: vindr_forest.png
+    group: Results
+    caption: ROC-AUC and AP with 95% bootstrap CIs on the VinDr-Mammo test set.
+    description: The large step is from mean pooling (E1) to attention MIL (E2, E3). MoLRE adds a further
+      gain. E4 has the best AUC and E8 the best AP.
+  - file: cross_dataset_auc.png
+    group: Results
+    caption: ROC-AUC of all eight configurations on the three datasets.
+    description: The ranking changes. E3 is best on INbreast, and E5 and E7 are best on LUMINA, although
+      neither is best internally.
+    wide: true
+  - file: roc_curves.png
+    group: Results
+    caption: ROC curves on VinDr-Mammo, INbreast and LUMINA.
+    description: Same colour per model in all panels. On LUMINA the curves bunch together and their order
+      changes.
+  - file: sensitivity.png
+    group: Results
+    caption: More experts or more heads is not monotonically better.
+    description: With two MIL heads, going from 2 to 3 to 4 experts lowers AUC (0.866 → 0.860 → 0.846).
+      With three experts, the number of heads trades AUC against AP.
+    wide: true
+  - file: subgroups.png
+    group: Analysis
+    caption: ROC-AUC by breast density and by manufacturer.
+    description: Performance is lower in density D (best 0.797) than in density C (best 0.873). The small
+      IMS subgroups (n = 20 and 58) should be read with caution.
+    wide: true
+  - file: delong.png
+    group: Analysis
+    caption: Pairwise DeLong tests and improvement over the frozen baseline.
+    description: Every variant beats E1 (p < 0.001), but the strongest variants are mostly not significantly
+      different from each other, so I report a trade-off rather than one best model.
+    wide: true
+  tables:
+  - caption: ROC-AUC / average precision; internal VinDr-Mammo test (1,968 breasts) and external sets
+    header:
+    - ID
+    - Configuration
+    - VinDr AUC
+    - VinDr AP
+    - INbreast AUC
+    - INbreast AP
+    - LUMINA AUC
+    - LUMINA AP
+    rows:
+    - - E1
+      - Frozen + global mean
+      - '0.773'
+      - '0.427'
+      - '0.726'
+      - '0.548'
+      - '0.647'
+      - '0.645'
+    - - E2
+      - ABMIL
+      - '0.845'
+      - '0.571'
+      - '0.855'
+      - '0.785'
+      - '0.729'
+      - '0.751'
+    - - E3
+      - MH-MIL (2 heads)
+      - '0.855'
+      - '0.580'
+      - '0.876'
+      - '0.814'
+      - '0.710'
+      - '0.736'
+    - - E4
+      - MoLRE-3 + ABMIL
+      - '0.878'
+      - '0.606'
+      - '0.868'
+      - '0.803'
+      - '0.709'
+      - '0.737'
+    - - E5
+      - MoLRE-3 + MH-MIL-2
+      - '0.860'
+      - '0.582'
+      - '0.844'
+      - '0.764'
+      - '0.752'
+      - '0.769'
+    - - E6
+      - MoLRE-2 + MH-MIL-2
+      - '0.866'
+      - '0.590'
+      - '0.865'
+      - '0.784'
+      - '0.722'
+      - '0.751'
+    - - E7
+      - MoLRE-4 + MH-MIL-2
+      - '0.846'
+      - '0.571'
+      - '0.859'
+      - '0.796'
+      - '0.748'
+      - '0.768'
+    - - E8
+      - MoLRE-3 + MH-MIL-3
+      - '0.870'
+      - '0.608'
+      - '0.873'
+      - '0.814'
+      - '0.715'
+      - '0.743'
+  results_note: ''
+  details: |-
+    ### What I took away
+    - **Pooling matters more than adaptation at first.** Replacing mean pooling with attention MIL gives the largest single gain (+0.072 AUC, +0.143 AP). Adapting the backbone with MoLRE adds a smaller, complementary gain (E2 → E4: +0.033 AUC, p = 0.014).
+    - **Capacity is not a free lunch.** More experts or more heads did not help consistently, and the strongest variants are not significantly different from one another.
+    - **Rankings move under shift.** INbreast, which shares the label definition, keeps strong performance (best AUC 0.876, AP 0.814). LUMINA changes both the vendor mix and the endpoint, so AUC drops to about 0.75, and a different configuration comes out on top.
+
+    ### Limitations
+    The pairwise tests are not corrected for multiple comparisons. The two smallest device subgroups are too small for firm conclusions. LUMINA's pathology endpoint differs from the BI-RADS-based training label.
+  contribution: First author. I designed and implemented the framework, ran the experiments and the statistical
+    analysis, and wrote the manuscript.
+  documents: []
+- slug: cancer-risk-prescreening
+  title: Machine Learning-Enabled Pre-Screening for Five-Year Risk of Common Cancers Using Demographic
+    and Clinical Data
+  authors: A. Mehmood, S. A. Khan, L. Humbert-Vidan
+  status: submitted
+  venue: Cancer Epidemiology
+  year: 2026
+  group: Klarity
+  short: Models that estimate five-year risk of six common cancers from data already held in primary care,
+    so that screening invitations can follow individual risk rather than age alone.
+  tags:
+  - clinical risk prediction
+  - UK Biobank
+  - cancer screening
+  links: {}
+  highlights: []
+  problem: Screening invitations are mostly based on age, which ignores individual risk and may contribute
+    to low uptake. This work asks whether routine demographic and clinical data can identify who should
+    be invited first.
+  approach:
+  - title: Data
+    text: UK Biobank participants, with demographic, lifestyle, anthropometric and biomarker predictors.
+  - title: Models
+    text: Machine-learning models with a literature-guided feature-engineering layer, one per cancer type
+      (bowel, breast, lung, cervical, prostate, skin).
+  - title: Comparison
+    text: Against age-based invitation, the current standard.
+  diagram: ''
+  figures: []
+  tables: []
+  results_note: The model enriches the high-risk group about three-fold compared with age-based invitation.
+    Detailed results will be added once the paper is through review.
+  details: ''
+  contribution: First author. I developed and evaluated the models at Klarity.
+  documents: []
+- slug: disaster-ner-topic-modeling
+  title: A Named Entity Recognition and Topic Modeling-Based Solution for Locating and Better Assessment
+    of Natural Disasters in Social Media
+  authors: A. Mehmood, M. T. Zamir, M. A. Ayub, N. Ahmad, K. Ahmad
+  status: preprint
+  venue: arXiv:2405.00903
+  year: 2024
+  group: with Dr. Kashif Ahmad, MTU Ireland
+  citations: 23
+  short: Named entity recognition and topic modelling on social media posts to locate disasters and summarise
+    what affected people report.
+  tags:
+  - NLP
+  - named entity recognition
+  - topic modelling
+  - crisis informatics
+  links:
+    arxiv: https://arxiv.org/abs/2405.00903
+  highlights: []
+  problem: During a disaster, social media carries first-hand reports, but there are far too many posts
+    to read and locations are rarely given in a structured way.
+  approach:
+  - title: Locations
+    text: Named entity recognition extracts place names from posts so events can be mapped.
+  - title: Topics
+    text: Topic modelling groups posts by theme to support assessment of the situation on the ground.
+  diagram: ''
+  figures: []
+  tables: []
+  results_note: ''
+  details: ''
+  contribution: First author.
+  documents: []
+- slug: llm-unlearning-semeval
+  title: Unlearning from LLMs using Gradient Ascent plus KL Divergence
+  authors: A. Mehmood et al.
+  status: shared_task
+  venue: SemEval-2025
+  year: 2025
+  group: Shared task
+  short: Making a language model forget targeted data while keeping its general ability.
+  tags:
+  - LLMs
+  - machine unlearning
+  links: {}
+  highlights: []
+  problem: Language models can memorise sensitive or copyrighted training data. Unlearning tries to remove
+    it without retraining from scratch.
+  approach:
+  - title: Gradient ascent
+    text: Raise the loss on the data to be forgotten.
+  - title: KL regulariser
+    text: Keep the model's outputs on the retained data close to the original model.
+  diagram: ''
+  figures: []
+  tables: []
+  results_note: ''
+  details: ''
+  contribution: ''
+  documents: []
+- slug: cross-device-harmonisation
+  title: Cross-device harmonisation of mammograms
+  authors: ''
+  status: in_progress
+  venue: ''
+  year: ''
+  group: Ongoing
+  short: Harmonising mammograms across acquisition devices before classification, motivated by the device-level
+    drops in both mammography papers. I also use device unlearning to measure how much vendor information
+    the representations retain. Preliminary models improve on the unharmonised baseline.
+  tags:
+  - domain shift
+  - harmonisation
+  - unlearning
+  links: {}
+  highlights: []
+  problem: ''
+  approach: []
+  diagram: ''
+  figures: []
+  tables: []
+  results_note: ''
+  details: ''
+  contribution: ''
+  documents: []
+- slug: virtual-staining-flow-matching
+  title: H&E to IHC virtual stain translation with flow matching
+  authors: ''
+  status: in_progress
+  venue: ''
+  year: ''
+  group: Ongoing
+  short: Translating H&E slides to IHC with flow matching, with current results above the baseline. An
+    earlier attempt at lesion synthesis with LoRA-adapted latent-diffusion inpainting did not improve
+    downstream performance, because natural-image priors favour seamless blending over diagnostically
+    faithful structure. That result motivated the switch to flow matching with frequency-domain constraints.
+  tags:
+  - generative models
+  - flow matching
+  - computational pathology
+  links: {}
+  highlights: []
+  problem: ''
+  approach: []
+  diagram: ''
+  figures: []
+  tables: []
+  results_note: ''
+  details: ''
+  contribution: ''
+  documents: []
+- slug: bioage-chronic-disease-ehr
+  title: Chronic disease, biological age and mortality from longitudinal EHR
+  authors: ''
+  status: in_progress
+  venue: ''
+  year: ''
+  group: Klarity
+  short: Models on linked EHR and insurance records with irregular follow-up, predicting chronic disease
+    progression and mortality and estimating biological age.
+  tags:
+  - longitudinal EHR
+  - risk prediction
+  - explainable AI
+  links: {}
+  highlights: []
+  problem: ''
+  approach: []
+  diagram: ''
+  figures: []
+  tables: []
+  results_note: ''
+  details: ''
+  contribution: ''
+  documents: []
+other_projects:
+- Fine-tuning BLIP and CLIP for medical report generation from tuberculosis chest imaging
+- Parameter-efficient fine-tuning of quantized LLMs (Llama 2/3, Mistral, Falcon) for Urdu summarisation
+- Medical report summarisation with LLMs; information extraction from doctor–patient conversations with
+  RAG
+- Alzheimer's detection with Vision Transformers; TB classification and detection (ViT, YOLOv5); skin
+  lesion segmentation (U-Net, DeepLabV3, TransViT); ECG arrhythmia detection
+- Flux fine-tuning for logo generation, virtual try-on/try-off with Stable Diffusion, face unmasking with
+  Pix2Pix GAN
+future_direction:
+  intro: Both mammography papers end in the same place. The models work on the data they were trained
+    on, but they lose accuracy when the scanner, the breast density or the label definition changes, and
+    fine-grained grading is where they fail first. I want my PhD to be about closing that gap, and about
+    making the models say why they decided what they did.
+  themes:
+  - title: Robustness to acquisition shift
+    text: Harmonising images across vendors and unlearning device-specific information, evaluated with
+      stratified analysis and external validation rather than one aggregate number.
+  - title: Generative models that respect anatomy
+    text: Flow-matching and diffusion models for virtual staining and synthetic data, constrained so they
+      preserve diagnostically relevant structure rather than producing plausible-looking textures.
+  - title: Explanations in clinical vocabulary
+    text: Extending finding- and BI-RADS-grounded prototypes to more views, prior exams and other modalities,
+      and checking with clinicians whether they help.
+  - title: Combining images, records and text
+    text: Using longitudinal clinical history and reports together with images, building on my EHR work
+      at Klarity and on vision-language models.
+proposal:
+  title: Shift-robust and explainable models for breast cancer screening
+  status: This is a draft. I'm happy to shape it around the direction of the group I join.
+  pdf: ''
+  sections:
+  - heading: Motivation
+    text: In my experiments, mammography models trained on one dataset lose accuracy on new devices, dense
+      breasts and borderline BI-RADS categories, and these are the cases where help is most needed. Aggregate
+      metrics hide this.
+  - heading: Research questions
+    list:
+    - Can harmonisation or representation-level unlearning remove device effects without removing diagnostic
+      signal?
+    - Can generative models produce realistic, structure-preserving training data for rare and borderline
+      findings?
+    - Do finding- and BI-RADS-grounded explanations stay faithful under shift, and do they help readers?
+  - heading: Plan
+    list:
+    - 'Year 1: a benchmark of device and density shift across public mammography datasets; harmonisation
+      and device unlearning.'
+    - 'Year 2: structure-preserving generative augmentation (flow matching) for rare findings; evaluation
+      on external data.'
+    - 'Year 3: prototype explanations across views and prior exams; reader study; calibration under shift.'
+  - heading: Expected outcomes
+    list:
+    - A reproducible protocol for reporting performance under acquisition and population shift.
+    - Methods that improve worst-subgroup performance, not only the average.
+    - Explanations evaluated with clinicians.

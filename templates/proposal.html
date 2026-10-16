@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Research proposal | {{ site.profile.name }}{% endblock %}
+{% block content %}
+{% set pr = site.proposal %}
+<p class="crumb">Research proposal</p>
+<h1>{{ pr.title }}</h1>
+<p class="muted"><i>{{ pr.status }}</i>{% if pr.pdf %} Full version: <a href="{{ url_for('static', filename=pr.pdf) }}">PDF</a>.{% endif %}</p>
+{% for s in pr.sections %}
+  <h2>{{ s.heading }}</h2>
+  {% if s.text %}{{ s.text|paras }}{% endif %}
+  {% if s.list %}<ul>{% for i in s.list %}<li>{{ i }}</li>{% endfor %}</ul>{% endif %}
+{% endfor %}
+{% endblock %}

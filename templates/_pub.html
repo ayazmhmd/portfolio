@@ -1,0 +1,28 @@
+{% import "_diagrams.html" as dg with context %}
+
+{# One entry in a publication list, in the usual academic-homepage style. #}
+{% macro entry(p) -%}
+{% set thumb = p.thumb or (p.figures[0].file if p.figures) %}
+<div class="pub{% if not thumb and not p.diagram %} nothumb{% endif %}">
+  {% if thumb %}
+    <a class="pub-thumb" href="{{ url_for('project', slug=p.slug) }}"><img src="{{ thumb|asset(p.slug) }}" alt="" loading="lazy"></a>
+  {% elif p.diagram %}
+    <a class="pub-thumb svg" href="{{ url_for('project', slug=p.slug) }}" aria-hidden="true" tabindex="-1">{{ dg.diagram(p.diagram) }}</a>
+  {% endif %}
+  <div class="pub-body">
+    <a class="pub-title" href="{{ url_for('project', slug=p.slug) }}">{{ p.title }}</a>
+    {% if p.authors %}<div class="pub-authors">{{ p.authors|me }}</div>{% endif %}
+    <div class="pub-venue">
+      {% if p.venue and p.venue != 'Manuscript' %}<i>{{ p.venue }}</i>{% if p.year %}, {{ p.year }}{% endif %}{% endif %}
+      {% if p.status in ('under_review','submitted','ready','in_progress') %}<span class="status">({{ STATUS[p.status] }})</span>{% endif %}
+      {% if p.citations %}<span class="muted">· cited by {{ p.citations }}</span>{% endif %}
+    </div>
+    {% if not p.venue and p.short %}<div class="pub-short">{{ p.short }}</div>{% endif %}
+    <div class="pub-links">
+      <a href="{{ url_for('project', slug=p.slug) }}">details</a>
+      {%- for k, v in (p.links or {}).items() %} / <a href="{{ v }}">{{ LINK_LABELS.get(k, k) }}</a>{% endfor %}
+      {%- if p.figures %} / <span class="muted">{{ p.figures|length }} figure{{ 's' if p.figures|length > 1 }}</span>{% endif %}
+    </div>
+  </div>
+</div>
+{%- endmacro %}

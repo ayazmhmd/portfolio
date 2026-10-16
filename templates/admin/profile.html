@@ -1,0 +1,38 @@
+{% extends "admin/base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('admin.dashboard') }}">← Dashboard</a></p>
+<h1>Profile and contact</h1>
+<form method="post" enctype="multipart/form-data">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <section class="card">
+    <h2>About you</h2>
+    <div class="grid2">
+      <label>Name<input name="name" value="{{ pr.name or '' }}"></label>
+      <label>Location<input name="location" value="{{ pr.location or '' }}"></label>
+    </div>
+    <label>Line under your name<input name="title" value="{{ pr.title or '' }}"></label>
+    <label>Bio <span class="hint">(blank line between paragraphs)</span><textarea name="bio" rows="12">{{ (pr.bio or [])|join('\n\n') }}</textarea></label>
+    <label>What you're looking for <span class="hint">(highlighted line on the home page)</span><input name="status" value="{{ pr.status or '' }}"></label>
+    <label>Research interests <span class="hint">(comma separated)</span><input name="interests" value="{{ (pr.interests or [])|join(', ') }}"></label>
+  </section>
+  <section class="card">
+    <h2>Photo</h2>
+    {% if pr.photo %}<img src="{{ url_for('admin.raw', path='static/' ~ pr.photo) }}" class="preview" alt=""><label class="check"><input type="checkbox" name="remove_photo"> Remove photo</label>{% endif %}
+    <label>Upload photo<input type="file" name="photo" accept="image/*"></label>
+    <p class="hint">To replace your CV, go to <a href="{{ url_for('admin.documents') }}">Documents</a>.</p>
+  </section>
+  <section class="card">
+    <h2>Contact</h2>
+    <div class="grid2">
+      {% for k in ['email','linkedin','github','google_scholar','kaggle','orcid'] %}
+      <label>{{ k|replace('_',' ') }}<input name="{{ k }}" value="{{ ct.get(k, '') }}"></label>
+      {% endfor %}
+      <label>WhatsApp number<input name="whatsapp" value="{{ ct.whatsapp or '' }}"></label>
+      <label class="check" style="align-self:end"><input type="checkbox" name="show_whatsapp" {{ 'checked' if ct.show_whatsapp }}> Show WhatsApp publicly on the contact page</label>
+    </div>
+    <label>Collaboration note on the contact page<textarea name="collaboration_note" rows="3">{{ ct.collaboration_note or '' }}</textarea></label>
+  </section>
+  <div class="savebar"><button class="primary">Save</button></div>
+</form>
+{% endblock %}

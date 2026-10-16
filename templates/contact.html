@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Contact | {{ site.profile.name }}{% endblock %}
+{% block content %}
+{% set c = site.contact %}
+{% set kinds = ['PhD position', 'Research collaboration', 'Request for results / a paper', 'Other'] %}
+{% set about = request.args.get('about', '') %}
+{% set pre = form.kind or request.args.get('kind', '') or (kinds[2] if about else '') %}
+<h1>Contact</h1>
+<p>{{ c.collaboration_note }}</p>
+<p>The quickest way to reach me is email: <a href="mailto:{{ c.email }}">{{ c.email }}</a>.
+  {% if c.show_whatsapp and c.whatsapp %}I'm also on WhatsApp at <a href="https://wa.me/{{ c.whatsapp|replace('+','')|replace(' ','') }}">{{ c.whatsapp }}</a>.
+  {% else %}If you'd prefer WhatsApp or a call, email me and I'll send my number.{% endif %}
+  You can also find me on <a href="{{ c.linkedin }}">LinkedIn</a> and <a href="{{ c.github }}">GitHub</a>{% if c.kaggle %} and <a href="{{ c.kaggle }}">Kaggle</a>{% endif %}.</p>
+
+<h2>Or leave a message here</h2>
+<form method="post" class="form" novalidate>
+  <div class="row2">
+    <label>Name<input name="name" required value="{{ form.name or '' }}"></label>
+    <label>Email<input name="email" type="email" required value="{{ form.email or '' }}"></label>
+  </div>
+  <div class="row2">
+    <label>University / organisation<input name="affiliation" value="{{ form.affiliation or '' }}"></label>
+    <label>About
+      <select name="kind">{% for k in kinds %}<option {{ 'selected' if pre == k }}>{{ k }}</option>{% endfor %}</select>
+    </label>
+  </div>
+  <label>Message<textarea name="message" rows="7" required>{{ form.message or ('Re: ' ~ about ~ '\n\n' if about else '') }}</textarea></label>
+  <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <p><button type="submit">Send</button></p>
+</form>
+{% endblock %}

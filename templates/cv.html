@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}CV | {{ site.profile.name }}{% endblock %}
+{% macro jobs(list) %}
+<dl class="cvlist">
+  {% for j in list %}
+  <dt>{{ j.years }}</dt>
+  <dd><b>{{ j.role }}</b>, {{ j.org }}
+    {% if j.points %}<ul>{% for pt in j.points %}<li>{{ pt }}</li>{% endfor %}</ul>{% endif %}
+  </dd>
+  {% endfor %}
+</dl>
+{% endmacro %}
+{% block content %}
+<h1>Curriculum vitae</h1>
+<p>The full CV is available as a <a href="{{ cv_href }}">PDF</a>. Transcripts, degree and references are on the <a href="{{ url_for('documents') }}">documents page</a>.</p>
+
+<h2>Education</h2>
+<dl class="cvlist">
+  {% for e in site.education %}
+  <dt>{{ e.years }}</dt>
+  <dd><b>{{ e.degree }}</b>, {{ e.school }} <span class="muted">({{ e.grade }})</span>
+    {% if e.details %}<br>{{ e.details }}{% endif %}
+    {% if e.supervisor %}<br><span class="muted">Supervisor: {{ e.supervisor }}</span>{% endif %}
+  </dd>
+  {% endfor %}
+</dl>
+
+<h2>Research experience</h2>
+{{ jobs(site.experience.research) }}
+
+<h2>Industry experience</h2>
+{{ jobs(site.experience.industry) }}
+
+<h2>Papers</h2>
+<ol class="publist">
+  {% for p in site.projects if p.status != 'in_progress' %}
+  <li>{% if p.authors %}{{ p.authors|me }}. {% endif %}“<a href="{{ url_for('project', slug=p.slug) }}">{{ p.title }}</a>.” {% if p.venue != 'Manuscript' %}<i>{{ p.venue }}</i>{% if p.year %}, {{ p.year }}{% endif %}{% endif %}{% if p.status in ('under_review','submitted','ready') %} ({{ STATUS[p.status] }}){% endif %}.</li>
+  {% endfor %}
+</ol>
+{% endblock %}

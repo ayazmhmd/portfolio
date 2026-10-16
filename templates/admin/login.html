@@ -1,0 +1,10 @@
+{% extends "admin/base.html" %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<form method="post" class="card login">
+  <h1>Site admin</h1>
+  <label>Password<input type="password" name="password" autofocus required></label>
+  <button class="primary">Log in</button>
+  <p class="hint"><a href="{{ url_for('home') }}">← back to the site</a></p>
+</form>
+{% endblock %}

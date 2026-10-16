@@ -1,0 +1,66 @@
+{# ---------- Built-in schematic diagrams (SVG, theme-aware) ---------- #}
+{% macro box(x, y, w, h, title, sub='', accent=false) -%}
+  <g>
+    <rect x="{{x}}" y="{{y}}" width="{{w}}" height="{{h}}" rx="3" class="{{ 'd-acc' if accent else 'd-box' }}"/>
+    <text x="{{ x + w/2 }}" y="{{ y + (h/2 if not sub else h/2 - 6) }}" class="d-t" text-anchor="middle" dominant-baseline="middle">{{ title }}</text>
+    {% if sub %}<text x="{{ x + w/2 }}" y="{{ y + h/2 + 11 }}" class="d-s" text-anchor="middle" dominant-baseline="middle">{{ sub }}</text>{% endif %}
+  </g>
+{%- endmacro %}
+
+{% macro arrow(x1, y1, x2, y2) -%}
+  <line x1="{{x1}}" y1="{{y1}}" x2="{{x2}}" y2="{{y2}}" class="d-l" marker-end="url(#ah)"/>
+{%- endmacro %}
+
+{% macro defs() -%}
+  <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="d-ah"/></marker></defs>
+{%- endmacro %}
+
+{% macro diagram(kind) %}
+{% if kind == 'mammo' %}
+<svg viewBox="0 0 800 230" role="img" aria-label="Pipeline: CC and MLO views are cropped, encoded, fused, matched to Finding–BI-RADS prototypes, then classified">
+  {{ defs() }}
+  {{ box(10, 30, 100, 54, 'CC view', 'mammogram') }}
+  {{ box(10, 146, 100, 54, 'MLO view', 'mammogram') }}
+  {{ box(135, 30, 135, 54, 'Breast crop', 'remove background') }}
+  {{ box(135, 146, 135, 54, 'Breast crop', 'remove background') }}
+  {{ box(295, 30, 105, 54, 'Encoder', 'CC features') }}
+  {{ box(295, 146, 105, 54, 'Encoder', 'MLO features') }}
+  {{ box(430, 88, 100, 54, 'Multi-view', 'fusion', true) }}
+  {{ box(555, 88, 145, 54, 'Prototypes', 'Finding · BI-RADS', true) }}
+  {{ box(720, 88, 70, 54, 'Label', '+ why') }}
+  {{ arrow(110,57,133,57) }}{{ arrow(110,173,133,173) }}
+  {{ arrow(270,57,293,57) }}{{ arrow(270,173,293,173) }}
+  {{ arrow(400,57,428,100) }}{{ arrow(400,173,428,130) }}
+  {{ arrow(530,115,553,115) }}{{ arrow(700,115,718,115) }}
+</svg>
+{% elif kind == 'lora' %}
+<svg viewBox="0 0 760 220" role="img" aria-label="Pipeline: dual-view mammograms pass through a frozen foundation model with trainable LoRA adapters, then views are combined for a breast-level prediction">
+  {{ defs() }}
+  {{ box(10, 30, 110, 54, 'CC view') }}
+  {{ box(10, 136, 110, 54, 'MLO view') }}
+  <rect x="160" y="14" width="280" height="192" rx="12" class="d-frame"/>
+  <text x="300" y="34" class="d-s" text-anchor="middle">Foundation model (frozen)</text>
+  {{ box(180, 50, 240, 40, 'Transformer blocks  ❄') }}
+  {{ box(180, 102, 240, 40, 'LoRA adapters  (trainable, low-rank)', '', true) }}
+  {{ box(180, 154, 240, 40, 'Transformer blocks  ❄') }}
+  {{ box(480, 83, 120, 54, 'Dual-view', 'aggregation', true) }}
+  {{ box(640, 83, 110, 54, 'Breast-level', 'prediction') }}
+  {{ arrow(120,57,158,90) }}{{ arrow(120,163,158,130) }}
+  {{ arrow(440,110,478,110) }}{{ arrow(600,110,638,110) }}
+</svg>
+{% elif kind == 'risk' %}
+<svg viewBox="0 0 760 200" role="img" aria-label="Pipeline: demographic and clinical data form a cohort, ML models output five-year risk per cancer, explained by feature attributions, used for pre-screening referral">
+  {{ defs() }}
+  {{ box(10, 20, 130, 54, 'Demographics', 'age, sex, …') }}
+  {{ box(10, 120, 130, 54, 'Clinical data', 'history, labs, …') }}
+  {{ box(180, 70, 120, 54, 'Cohort', '5-year outcome') }}
+  {{ box(340, 70, 130, 54, 'ML risk models', 'per cancer type', true) }}
+  {{ box(510, 20, 120, 54, '5-year risk', 'score') }}
+  {{ box(505, 120, 130, 54, 'Explanation', 'XAI attribution', true) }}
+  {{ box(660, 70, 90, 54, 'Pre-screen', 'referral') }}
+  {{ arrow(140,47,178,90) }}{{ arrow(140,147,178,105) }}
+  {{ arrow(300,97,338,97) }}{{ arrow(470,90,508,52) }}{{ arrow(470,105,508,142) }}
+  {{ arrow(630,47,658,85) }}{{ arrow(630,147,658,110) }}
+</svg>
+{% endif %}
+{% endmacro %}

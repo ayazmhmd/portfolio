@@ -1,0 +1,63 @@
+{% extends "admin/base.html" %}
+{% block title %}Documents{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('admin.dashboard') }}">← Dashboard</a> · <a href="{{ url_for('documents') }}" target="_blank">View documents page ↗</a></p>
+<h1>Documents and private links</h1>
+
+<form method="post" enctype="multipart/form-data">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+  <section class="card">
+    <h2>Documents</h2>
+    <p class="hint"><b>Public</b> documents can be opened by anyone. <b>Private</b> ones (transcripts, degree, letters) are kept outside the public folder and open only for visitors who came through one of your private links below, or for you while logged in.</p>
+    {% for d in docs %}
+    <div class="doc-row">
+      <label>#<input name="order_{{ loop.index0 }}" value="{{ loop.index }}"></label>
+      <label>Title<input name="title_{{ loop.index0 }}" value="{{ d.title }}"></label>
+      <label>Type<select name="kind_{{ loop.index0 }}">{% for k in DOC_KINDS %}<option {{ 'selected' if d.kind == k }}>{{ k }}</option>{% endfor %}</select></label>
+      <label class="check"><input type="checkbox" name="public_{{ loop.index0 }}" {{ 'checked' if d.visibility == 'public' }}> Public</label>
+      <div class="full">
+        <label>Note <span class="hint">(shown next to the title)</span><input name="note_{{ loop.index0 }}" value="{{ d.note or '' }}"></label>
+        <div class="row small">
+          <a href="{{ url_for('document_file', doc_id=d.id) }}" target="_blank">{{ d.file }}</a>
+          <span>Replace file: <input type="file" name="replace_{{ loop.index0 }}"></span>
+          <label class="check danger-text"><input type="checkbox" name="del_{{ loop.index0 }}"> Delete</label>
+        </div>
+      </div>
+    </div>
+    {% else %}<p>No documents yet.</p>{% endfor %}
+
+    <h3>Add a document</h3>
+    <div class="grid2">
+      <label>File (PDF preferred)<input type="file" name="new_file"></label>
+      <label>Title<input name="new_title" placeholder="e.g. Motivation letter, TU Munich"></label>
+      <label>Type<select name="new_kind">{% for k in DOC_KINDS %}<option>{{ k }}</option>{% endfor %}</select></label>
+      <label>Note<input name="new_note" placeholder="optional"></label>
+      <label class="check"><input type="checkbox" name="new_public"> Public (leave unticked for private)</label>
+    </div>
+  </section>
+  <div class="savebar"><button class="primary">Save documents</button></div>
+</form>
+
+<section class="card" id="links">
+  <h2>Private links</h2>
+  <p class="hint">Make one link per supervisor or application, e.g. "Prof. Müller, TU Munich". Anyone with the link sees all documents and your references' email addresses. You can switch a link off at any time.</p>
+  <form method="post" action="{{ url_for('admin.share') }}" class="row">
+    <input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="action" value="create">
+    <input name="label" placeholder="Who is this link for?" required>
+    <button class="primary">Create link</button>
+  </form>
+  <table class="list">
+    {% for s in links %}
+    <tr class="{{ '' if s.active else 'off' }}">
+      <td style="width:28%"><b>{{ s.label }}</b><br><span class="hint">created {{ s.created }}{% if not s.active %} · switched off{% endif %}</span></td>
+      <td><span class="copy">{{ request.host_url }}s/{{ s.token }}</span></td>
+      <td class="actions">
+        <form method="post" action="{{ url_for('admin.share') }}" class="inline"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="token" value="{{ s.token }}"><button name="action" value="toggle">{{ 'Switch off' if s.active else 'Switch on' }}</button></form>
+        <form method="post" action="{{ url_for('admin.share') }}" class="inline" onsubmit="return confirm('Delete this link?');"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="token" value="{{ s.token }}"><button class="danger" name="action" value="delete">Delete</button></form>
+      </td>
+    </tr>
+    {% else %}<tr><td class="hint">No links yet.</td></tr>{% endfor %}
+  </table>
+  {% if storage.name == 'github' %}<p class="hint">New links work after Vercel redeploys (about a minute).</p>{% endif %}
+</section>
+{% endblock %}

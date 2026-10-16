@@ -1,0 +1,116 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ 'New project' if is_new else 'Edit project' }}{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('admin.dashboard') }}">← Dashboard</a>{% if not is_new %} · <a href="{{ url_for('project', slug=p.slug) }}" target="_blank">View page ↗</a>{% endif %}</p>
+<h1>{{ 'Add a project' if is_new else p.title }}</h1>
+
+<form method="post" enctype="multipart/form-data">
+  <input type="hidden" name="csrf" value="{{ csrf }}">
+
+  <section class="card">
+    <h2>Basics</h2>
+    <label>Title<input name="title" value="{{ p.title or '' }}" required></label>
+    <div class="grid3">
+      <label>Status
+        <select name="status">{% for s in STATUSES %}<option value="{{ s }}" {{ 'selected' if p.status == s }}>{{ s|replace('_',' ') }}</option>{% endfor %}</select>
+      </label>
+      <label>Venue / journal<input name="venue" value="{{ p.venue or '' }}" placeholder="IEEE Access, arXiv:…, NeurIPS"></label>
+      <label>Year<input name="year" value="{{ p.year or '' }}"></label>
+    </div>
+    <label>Authors <span class="hint">(your name is bolded automatically)</span><input name="authors" value="{{ p.authors or '' }}" placeholder="A. Mehmood, B. Author, C. Author"></label>
+    <div class="grid3">
+      <label>Group / context<input name="group" value="{{ p.group or '' }}" placeholder="MS thesis, NUST"></label>
+      <label>Citations<input name="citations" value="{{ p.citations or '' }}"></label>
+      {% if is_new %}<label>Page address (slug)<input name="slug" placeholder="auto from title"></label>{% else %}<label>Page address<input value="/research/{{ p.slug }}" disabled></label>{% endif %}
+    </div>
+    <label>One-sentence summary <span class="hint">(shown at the top of the page and in lists)</span><textarea name="short" rows="2">{{ p.short or '' }}</textarea></label>
+    <label>Key numbers <span class="hint">(one per line: <code>value | what it means</code>, shown as a row of highlights)</span>
+      <textarea name="highlights" rows="4" placeholder="0.878 | ROC-AUC on VinDr-Mammo">{{ highlights_text }}</textarea></label>
+    <label>Keywords <span class="hint">(comma separated)</span><input name="tags" value="{{ (p.tags or [])|join(', ') }}"></label>
+    {% if is_new %}
+    <label>Position in list
+      <select name="position"><option value="top">At the top</option><option value="bottom">At the bottom</option></select></label>
+    {% endif %}
+  </section>
+
+  <section class="card">
+    <h2>Links</h2>
+    <p class="hint">Leave empty to hide. Each one appears as a [link] under the title.</p>
+    <div class="grid2">
+      {% for k in LINK_KEYS %}<label>{{ k }}<input name="link_{{ k }}" value="{{ (p.links or {}).get(k, '') }}" placeholder="https://"></label>{% endfor %}
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Write-up</h2>
+    <label>Motivation / problem <span class="hint">(leave a blank line between paragraphs)</span><textarea name="problem" rows="6">{{ p.problem or '' }}</textarea></label>
+    <label>Method steps <span class="hint">(one step per line, written as <code>Step name: what it does</code>)</span>
+      <textarea name="approach" rows="6">{{ approach_text }}</textarea></label>
+    <label>Built-in method diagram
+      <select name="diagram">{% for d in DIAGRAMS %}<option value="{{ d }}" {{ 'selected' if (p.diagram or '') == d }}>{{ d or 'none (use my own figure instead)' }}</option>{% endfor %}</select></label>
+    <label>Extended write-up <span class="hint">(Markdown: <code>### Heading</code>, <code>- bullet</code>, <code>**bold**</code>; shown after the results)</span>
+      <textarea name="details" rows="10" class="mono">{{ p.details or '' }}</textarea></label>
+    <label>My role<textarea name="contribution" rows="2">{{ p.contribution or '' }}</textarea></label>
+  </section>
+
+  <section class="card">
+    <h2>Figures</h2>
+    <p class="hint">Visitors can click any figure to see it full size with its caption and description. Images: png, jpg, gif, webp, svg.</p>
+    {% for f in p.figures or [] %}
+    <div class="fig-row">
+      <a href="{{ url_for('admin.raw', path='static/projects/' ~ p.slug ~ '/' ~ f.file) }}" target="_blank"><img src="{{ url_for('admin.raw', path='static/projects/' ~ p.slug ~ '/' ~ f.file) }}" alt=""></a>
+      <div>
+        <div class="grid-cap3">
+          <label>Order<input name="fig_order_{{ loop.index0 }}" value="{{ loop.index }}" size="2"></label>
+          <label>Section<input name="fig_group_{{ loop.index0 }}" value="{{ f.group or '' }}" list="figgroups"></label>
+          <label>Caption<input name="fig_caption_{{ loop.index0 }}" value="{{ f.caption or '' }}"></label>
+        </div>
+        <label>Details shown when clicked<textarea name="fig_desc_{{ loop.index0 }}" rows="3">{{ f.description or '' }}</textarea></label>
+        <div class="row small">
+          <label class="check"><input type="radio" name="thumb" value="{{ f.file }}" {{ 'checked' if p.thumb == f.file }}> Use as thumbnail in lists</label>
+          <label class="check"><input type="checkbox" name="fig_wide_{{ loop.index0 }}" {{ 'checked' if f.wide }}> Full width</label>
+          <label class="check danger-text"><input type="checkbox" name="fig_del_{{ loop.index0 }}"> Delete this figure</label>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <datalist id="figgroups"><option>Method</option><option>Results</option><option>Analysis</option><option>Where it works and where it fails</option></datalist>
+    <h3>Add figures</h3>
+    {% for j in range(NEW_FIG_SLOTS) %}
+    <div class="new-fig">
+      <input type="file" name="newfig_file_{{ j }}" accept="image/*">
+      <div class="grid-cap2"><input name="newfig_group_{{ j }}" placeholder="Section, e.g. Results" list="figgroups"><input name="newfig_caption_{{ j }}" placeholder="Caption, e.g. Grad-CAM on test images"></div>
+      <textarea name="newfig_desc_{{ j }}" rows="2" placeholder="Optional details shown when the figure is clicked (setup, what to notice, numbers)"></textarea>
+    </div>
+    {% endfor %}
+    <p class="hint">Need more than {{ NEW_FIG_SLOTS }}? Save, and the empty slots come back.</p>
+  </section>
+
+  <section class="card">
+    <h2>Results tables</h2>
+    <label>Tables <span class="hint">(paste CSV. Start each table with a line <code>## Caption</code>, then the header row, then the data rows. Leave a blank line between tables.)</span>
+      <textarea name="tables" rows="12" class="mono" placeholder="## Binary classification, 512 px&#10;Model, Dataset, AUC, F1&#10;Baseline, VinDr, 0.81, 0.76&#10;Ours, VinDr, 0.86, 0.80">{{ tables_text }}</textarea></label>
+    <label>Note under results <span class="hint">(optional, e.g. "full results on request")</span><textarea name="results_note" rows="2">{{ p.results_note or '' }}</textarea></label>
+  </section>
+
+  <section class="card">
+    <h2>Documents</h2>
+    <p class="hint">PDF summary, slides, poster, notebook… Shown as [links] under the title.</p>
+    {% for d in p.documents or [] %}
+    <div class="row">
+      <a href="{{ url_for('admin.raw', path='static/projects/' ~ p.slug ~ '/' ~ d.file) }}" target="_blank">{{ d.file }}</a>
+      <input name="doc_label_{{ loop.index0 }}" value="{{ d.label }}">
+      <label class="check danger-text"><input type="checkbox" name="doc_del_{{ loop.index0 }}"> Delete</label>
+    </div>
+    {% endfor %}
+    {% for j in range(NEW_DOC_SLOTS) %}
+    <div class="row"><input type="file" name="newdoc_file_{{ j }}"><input name="newdoc_label_{{ j }}" placeholder="Label, e.g. Slides (PDF)"></div>
+    {% endfor %}
+  </section>
+
+  <div class="savebar">
+    <button class="primary" name="after" value="edit">Save</button>
+    <button name="after" value="view">Save and view page</button>
+  </div>
+</form>
+{% endblock %}

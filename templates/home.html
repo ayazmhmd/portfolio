@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% from "_pub.html" import entry with context %}
+{% block content %}
+{% set pr = site.profile %}{% set c = site.contact %}
+<section class="intro">
+  {% if pr.photo %}<img class="portrait" src="{{ url_for('static', filename=pr.photo) }}" alt="Photo of {{ pr.name }}">{% endif %}
+  <h1>{{ pr.name }}</h1>
+  <p class="role">{{ pr.title }}</p>
+  {% for para in pr.bio %}<p>{{ para }}</p>{% endfor %}
+  {% if pr.status %}<p class="seeking">{{ pr.status }} <a href="{{ url_for('contact') }}">Get in touch</a>.</p>{% endif %}
+  <p class="links">
+    <a href="mailto:{{ c.email }}">{{ c.email }}</a> ·
+    <a href="{{ cv_href }}">CV (PDF)</a> ·
+    <a href="{{ url_for('documents') }}">Documents</a> ·
+    {% if c.google_scholar %}<a href="{{ c.google_scholar }}">Google Scholar</a> · {% endif %}
+    <a href="{{ c.github }}">GitHub</a> ·
+    {% if c.kaggle %}<a href="{{ c.kaggle }}">Kaggle</a> · {% endif %}
+    <a href="{{ c.linkedin }}">LinkedIn</a>
+  </p>
+</section>
+
+{% if site.news %}
+<h2>News</h2>
+<table class="news">
+  {% for n in site.news[:6] %}<tr><td class="date">{{ n.date }}</td><td>{{ n.text }}</td></tr>{% endfor %}
+</table>
+{% endif %}
+
+<h2>Selected research</h2>
+{% for p in site.projects if p.status != 'in_progress' %}{{ entry(p) }}{% endfor %}
+
+{% set ongoing = site.projects|selectattr('status', 'equalto', 'in_progress')|list %}
+{% if ongoing %}
+<h2>Currently working on</h2>
+<ul class="ongoing">
+  {% for p in ongoing %}<li><a href="{{ url_for('project', slug=p.slug) }}">{{ p.title }}</a>. <span class="muted">{{ p.short|truncate(150) }}</span></li>{% endfor %}
+</ul>
+{% endif %}
+
+{% if site.notebook and site.notebook.html %}
+<p class="callout"><b>Notebook.</b> {{ site.notebook.text }} <a href="{{ url_for('notebook') }}">Open it</a>{% if site.notebook.ipynb %} or <a href="{{ url_for('static', filename=site.notebook.ipynb) }}">download the .ipynb</a>{% endif %}{% if site.notebook.kaggle %} · <a href="{{ site.notebook.kaggle }}">Kaggle</a>{% endif %}.</p>
+{% endif %}
+{% endblock %}
