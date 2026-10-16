@@ -21,7 +21,7 @@ bp = Blueprint("admin", __name__, url_prefix="/admin")
 
 IMAGE_EXT = {"png", "jpg", "jpeg", "gif", "webp", "svg"}
 DOC_EXT = {"pdf", "pptx", "ppt", "docx", "doc", "zip", "csv", "xlsx", "ipynb", "txt", "html", "mp4"}
-LINK_KEYS = ["arxiv", "pdf", "doi", "code", "kaggle", "notebook", "slides", "poster", "video"]
+LINK_KEYS = ["arxiv", "pdf", "doi", "code", "kaggle", "slides", "poster", "video"]
 STATUSES = ["under_review", "submitted", "ready", "published", "preprint", "shared_task", "in_progress"]
 DIAGRAMS = ["", "mammo", "lora", "risk"]
 DOC_KINDS = ["cv", "transcript", "degree", "letter", "statement", "proposal", "certificate", "other"]
@@ -32,9 +32,8 @@ YAML_SECTIONS = {
     "experience": "Experience (research & industry)",
     "references": "References",
     "other_projects": "Other projects",
-    "future_direction": "Future work page",
+    "research_direction": "Research direction page",
     "proposal": "Research proposal page",
-    "notebook": "Notebook link",
 }
 DEFAULT_PASSWORD = "change-me"
 

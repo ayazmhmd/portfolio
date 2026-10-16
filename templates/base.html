@@ -17,7 +17,7 @@
       <nav>
         {% set ep = request.endpoint %}
         <a href="{{ url_for('research') }}" {% if ep in ('research','project') %}class="on"{% endif %}>Research</a>
-        <a href="{{ url_for('direction') }}" {% if ep=='direction' %}class="on"{% endif %}>Future work</a>
+        <a href="{{ url_for('direction') }}" {% if ep=='direction' %}class="on"{% endif %}>Research direction</a>
         <a href="{{ url_for('proposal') }}" {% if ep=='proposal' %}class="on"{% endif %}>Proposal</a>
         <a href="{{ url_for('cv') }}" {% if ep=='cv' %}class="on"{% endif %}>CV</a>
         <a href="{{ url_for('documents') }}" {% if ep=='documents' %}class="on"{% endif %}>Documents</a>

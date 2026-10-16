@@ -95,7 +95,7 @@
 
   <section class="card">
     <h2>Documents</h2>
-    <p class="hint">PDF summary, slides, poster, notebook… Shown as [links] under the title.</p>
+    <p class="hint">PDF summary, slides, poster… Shown as [links] under the title.</p>
     {% for d in p.documents or [] %}
     <div class="row">
       <a href="{{ url_for('admin.raw', path='static/projects/' ~ p.slug ~ '/' ~ d.file) }}" target="_blank">{{ d.file }}</a>

@@ -39,7 +39,7 @@ GROUPS = [
     ("Ongoing work", ("in_progress",)),
 ]
 LINK_LABELS = {"arxiv": "arXiv", "pdf": "PDF", "doi": "DOI", "code": "code", "kaggle": "Kaggle",
-               "notebook": "notebook", "slides": "slides", "poster": "poster", "video": "video"}
+               "slides": "slides", "poster": "poster", "video": "video"}
 DOC_KINDS = {"cv": "CV", "transcript": "Transcript", "degree": "Degree", "letter": "Letter",
              "statement": "Statement", "proposal": "Proposal", "certificate": "Certificate", "other": "Document"}
 
@@ -156,22 +156,19 @@ def about_redirect():
     return redirect(url_for("cv"), 301)
 
 
-@app.route("/future-work")
+@app.route("/research-direction")
 def direction():
     return render_template("direction.html")
+
+
+@app.route("/future-work")
+def future_work_redirect():
+    return redirect(url_for("direction"), 301)
 
 
 @app.route("/proposal")
 def proposal():
     return render_template("proposal.html")
-
-
-@app.route("/notebook")
-def notebook():
-    nb = site().get("notebook") or {}
-    if nb.get("html"):
-        return redirect(url_for("static", filename=nb["html"]))
-    abort(404)
 
 
 # ------------------------------------------------------------------ documents

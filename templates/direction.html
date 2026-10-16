@@ -1,12 +1,59 @@
 {% extends "base.html" %}
-{% block title %}Future work | {{ site.profile.name }}{% endblock %}
+{% block title %}Research direction | {{ site.profile.name }}{% endblock %}
 {% block content %}
-{% set fd = site.future_direction %}
-<h1>What I want to work on next</h1>
-<p>{{ fd.intro }}</p>
-{% for t in fd.themes %}
-<h3>{{ loop.index }}. {{ t.title }}</h3>
-<p>{{ t.text }}</p>
+{% set rd = site.research_direction %}
+<p class="crumb">Research direction</p>
+<h1>{{ rd.title }}</h1>
+<p class="lead">{{ rd.intro }}</p>
+
+{% if rd.pipeline %}
+<div class="pipeline" aria-label="How the themes fit together">
+  {% for st in rd.pipeline %}
+  <div class="pstage">
+    <span class="pnum">{{ loop.index }}</span>
+    <b>{{ st.stage }}</b>
+    <ul>{% for it in st['items'] %}<li>{{ it }}</li>{% endfor %}</ul>
+  </div>
+  {% if not loop.last %}<span class="parrow" aria-hidden="true">→</span>{% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+
+<nav class="toc">
+  {% for t in rd.themes %}<a href="#{{ t.id }}">{{ loop.index }}. {{ t.title }}</a>{% endfor %}
+</nav>
+
+{% set refnum = {} %}
+{% for t in rd.themes %}{% for r in t.refs or [] %}{% if r not in refnum %}{% set _ = refnum.update({r: refnum|length + 1}) %}{% endif %}{% endfor %}{% endfor %}
+
+{% for t in rd.themes %}
+<section class="theme-block" id="{{ t.id }}">
+  <h2><span class="tnum">{{ loop.index }}</span>{{ t.title }}</h2>
+  <p class="tsum">{{ t.summary }}</p>
+  <h3>Why this, from my own results</h3>
+  <p>{{ t.why }}</p>
+  <h3>Open questions</h3>
+  <ul>{% for q in t.questions %}<li>{{ q }}</li>{% endfor %}</ul>
+  <h3>How I would approach it</h3>
+  <ul>{% for a in t.approach %}<li>{{ a }}</li>{% endfor %}</ul>
+  <p class="tstatus"><b>Where I am:</b> {{ t.status }}
+    {% if t.refs %}<span class="trefs">See {% for r in t.refs %}<a href="#ref-{{ r }}">[{{ refnum[r] }}]</a>{% endfor %}</span>{% endif %}</p>
+</section>
 {% endfor %}
-<p class="ask">A longer version of this is in my <a href="{{ url_for('proposal') }}">draft research proposal</a>. If your group works on any of these, I'd be glad to <a href="{{ url_for('contact') }}">hear from you</a>.</p>
+
+{% if rd.principles %}
+<h2>How I want to work</h2>
+<ul>{% for p in rd.principles %}<li>{{ p }}</li>{% endfor %}</ul>
+{% endif %}
+
+<p class="ask">A three-year plan built on these themes is in my <a href="{{ url_for('proposal') }}">draft research proposal</a>. If your group works on any of them, I'd be glad to <a href="{{ url_for('contact') }}?kind=PhD+position">hear from you</a>.</p>
+
+{% if rd.references %}
+<h2>References</h2>
+<ol class="refs">
+  {% for key, n in refnum|dictsort(by='value') %}{% set r = rd.references[key] %}
+  <li id="ref-{{ key }}" value="{{ n }}">{{ r.text }} {% if r.url %}<a href="{{ r.url }}">link</a>{% endif %}</li>
+  {% endfor %}
+</ol>
+{% endif %}
 {% endblock %}
