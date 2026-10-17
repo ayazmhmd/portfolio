@@ -10,6 +10,8 @@
     <div class="grid2">
       <label>Name<input name="name" value="{{ pr.name or '' }}"></label>
       <label>Location<input name="location" value="{{ pr.location or '' }}"></label>
+      <label>Date of birth <span class="hint">(leave empty to hide)</span><input name="dob" value="{{ pr.dob or '' }}"></label>
+      <label>Nationality <span class="hint">(leave empty to hide)</span><input name="nationality" value="{{ pr.nationality or '' }}"></label>
     </div>
     <label>Line under your name<input name="title" value="{{ pr.title or '' }}"></label>
     <label>Bio <span class="hint">(blank line between paragraphs)</span><textarea name="bio" rows="12">{{ (pr.bio or [])|join('\n\n') }}</textarea></label>

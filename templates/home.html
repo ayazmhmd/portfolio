@@ -2,21 +2,29 @@
 {% from "_pub.html" import entry with context %}
 {% block content %}
 {% set pr = site.profile %}{% set c = site.contact %}
+<section class="profile-card">
+  {% if pr.photo %}<img class="avatar" src="{{ url_for('static', filename=pr.photo) }}" alt="Photo of {{ pr.name }}" width="180" height="180">{% endif %}
+  <div class="pinfo">
+    <h1>{{ pr.name }}</h1>
+    <p class="role">{{ pr.title }}</p>
+    <dl class="facts">
+      {% if pr.dob %}<dt>Date of birth</dt><dd>{{ pr.dob }}</dd>{% endif %}
+      {% if pr.nationality %}<dt>Nationality</dt><dd>{{ pr.nationality }}</dd>{% endif %}
+      {% if pr.location %}<dt>Location</dt><dd>{{ pr.location }}</dd>{% endif %}
+      <dt>Email</dt><dd><a href="mailto:{{ c.email }}">{{ c.email }}</a></dd>
+      {% if c.show_whatsapp and c.whatsapp %}<dt>Phone</dt><dd>{{ c.whatsapp }}</dd>{% endif %}
+      <dt>LinkedIn</dt><dd><a href="{{ c.linkedin }}">{{ c.linkedin|replace('https://www.','')|replace('https://','') }}</a></dd>
+      {% if c.google_scholar %}<dt>Scholar</dt><dd><a href="{{ c.google_scholar }}">Google Scholar profile</a></dd>{% endif %}
+      <dt>GitHub</dt><dd><a href="{{ c.github }}">{{ c.github|replace('https://','') }}</a></dd>
+      {% if c.kaggle %}<dt>Kaggle</dt><dd><a href="{{ c.kaggle }}">{{ c.kaggle|replace('https://www.','') }}</a></dd>{% endif %}
+    </dl>
+    <p class="pbuttons"><a class="pbtn" href="{{ cv_href }}">CV (PDF)</a><a class="pbtn" href="{{ url_for('documents') }}">Transcripts &amp; degree</a><a class="pbtn" href="{{ url_for('contact') }}">Contact</a></p>
+  </div>
+</section>
+
 <section class="intro">
-  {% if pr.photo %}<img class="portrait" src="{{ url_for('static', filename=pr.photo) }}" alt="Photo of {{ pr.name }}">{% endif %}
-  <h1>{{ pr.name }}</h1>
-  <p class="role">{{ pr.title }}</p>
   {% for para in pr.bio %}<p>{{ para }}</p>{% endfor %}
   {% if pr.status %}<p class="seeking">{{ pr.status }} <a href="{{ url_for('contact') }}">Get in touch</a>.</p>{% endif %}
-  <p class="links">
-    <a href="mailto:{{ c.email }}">{{ c.email }}</a> ·
-    <a href="{{ cv_href }}">CV (PDF)</a> ·
-    <a href="{{ url_for('documents') }}">Documents</a> ·
-    {% if c.google_scholar %}<a href="{{ c.google_scholar }}">Google Scholar</a> · {% endif %}
-    <a href="{{ c.github }}">GitHub</a> ·
-    {% if c.kaggle %}<a href="{{ c.kaggle }}">Kaggle</a> · {% endif %}
-    <a href="{{ c.linkedin }}">LinkedIn</a>
-  </p>
 </section>
 
 {% if site.news %}

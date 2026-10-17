@@ -6,6 +6,12 @@
 <h1>{{ rd.title }}</h1>
 <p class="lead">{{ rd.intro }}</p>
 
+{% if rd.domains %}
+<div class="domains">
+  {% for dm in rd.domains %}<div class="domain"><b>{{ dm.name }}</b><span>{{ dm.text }}</span></div>{% endfor %}
+</div>
+{% endif %}
+
 {% if rd.pipeline %}
 <div class="pipeline" aria-label="How the themes fit together">
   {% for st in rd.pipeline %}

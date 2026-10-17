@@ -1,11 +1,12 @@
 # Site content. Edit from /admin or by hand.
 profile:
   name: Ayaz Mehmood
-  title: AI researcher in medical imaging · MS Data Science, NUST
+  title: AI researcher · computer vision, generative and multimodal models · MS Data Science, NUST
   location: Islamabad, Pakistan
-  photo: ''
-  status: I am looking for a fully funded PhD position in medical imaging, on robustness to domain shift,
-    synthetic data, and efficient multimodal models.
+  photo: img/ayaz_mehmood.jpg
+  status: 'I am looking for a fully funded PhD position in computer vision and multimodal AI: robustness
+    to domain shift, synthetic data, and efficient vision-language models, applied to medical imaging
+    and beyond.'
   bio:
   - I work on medical imaging models that hold up outside the dataset they were trained on. My MS thesis
     at NUST, supervised by Dr. M. Daud Abdullah Asif, studied breast-level classification from dual-view
@@ -17,15 +18,20 @@ profile:
     cancer risk, chronic disease, biological age and mortality. My current side projects are cross-device
     harmonisation of mammograms and H&E-to-IHC virtual staining with flow matching.
   - I graduated first in my class in Computer Systems Engineering at UET Peshawar (CGPA 3.74), and completed
-    my MS in Data Science at NUST with a CGPA of 3.60.
+    my MS in Data Science at NUST (CGPA 3.60). Medical imaging is where I have done most of my work, but
+    the problems I care about (models that break under domain shift, scarce labels, and models too large
+    to deploy) are the same in remote sensing, security and autonomous systems, and I am keen to work
+    on them there too.
   interests:
   - domain shift and harmonisation
   - synthetic data generation (2D and 3D, flow matching)
   - learning from few samples
-  - multimodal and longitudinal modelling
-  - vision-language and small language models
+  - multimodal and temporal modelling
+  - vision-language models and agentic AI
   - quantization and knowledge distillation
   cv_pdf: files/Ayaz_Mehmood_CV.pdf
+  dob: 4 May 2000
+  nationality: Pakistani
 contact:
   email: ayazmehmood550@gmail.com
   linkedin: https://www.linkedin.com/in/ayaz-mehmood-5b941219a
@@ -119,19 +125,19 @@ documents:
   title: MS Data Science transcript, NUST
   kind: transcript
   file: Ayaz_Mehmood_MS_Transcript_NUST.pdf
-  visibility: private
-  note: CGPA 3.60 · ID number and date of birth removed
+  visibility: public
+  note: CGPA 3.60 / 4.00
 - id: bsc-transcript
   title: BSc Computer Systems Engineering transcript, UET Peshawar
   kind: transcript
   file: Ayaz_Mehmood_BSc_Transcript_UET.pdf
-  visibility: private
-  note: CGPA 3.74
+  visibility: public
+  note: CGPA 3.74 / 4.00, ranked first in class
 - id: bsc-degree
   title: BSc Computer Systems Engineering degree, UET Peshawar
   kind: degree
   file: Ayaz_Mehmood_BSc_Degree_UET.pdf
-  visibility: private
+  visibility: public
   note: Conferred 29 August 2022
 share_links: []
 projects:
@@ -761,112 +767,123 @@ other_projects:
 - Flux fine-tuning for logo generation, virtual try-on/try-off with Stable Diffusion, face unmasking with
   Pix2Pix GAN
 proposal:
-  title: Robust, data-efficient and deployable models for medical imaging
+  title: Robust, data-efficient and deployable vision and multimodal models
   status: This is a draft. I'm happy to shape it around the direction of the group I join.
   pdf: ''
   sections:
   - heading: Motivation
-    text: Medical imaging models are usually trained on one dataset and reported on its test split. In
-      my own experiments, the same models lost accuracy on another vendor, in dense breasts and on rare
-      borderline categories, and the best model changed with the dataset. These are the conditions under
-      which models will actually be used. Hospitals with the least data and the least hardware are also
-      the least served.
+    text: Vision models are usually trained on one dataset and reported on its test split, then deployed
+      on different sensors, sites and conditions. In my medical imaging experiments, the same models lost
+      accuracy on another vendor, in harder subgroups and on rare categories, and the best model changed
+      with the dataset. The same failure modes limit remote sensing, security and autonomous systems,
+      and the settings with the least data and hardware are the least served.
   - heading: Aim
-    text: To develop and evaluate methods that keep medical imaging models accurate and calibrated under
-      acquisition shift and data scarcity, using multimodal and longitudinal information, and to compress
-      them for deployment without measurable loss.
+    text: To develop and evaluate methods that keep vision and vision-language models accurate and calibrated
+      under domain shift and data scarcity, using multimodal and temporal information, and to compress
+      them for edge deployment without measurable loss. Medical imaging is the primary testbed, with transfer
+      to remote sensing or autonomous driving.
   - heading: Research questions
     list:
-    - Can harmonisation or device-invariant representations remove scanner effects without removing diagnostic
-      signal?
-    - Can flow-matching generators produce anatomically faithful 2D and 3D data that improves performance
-      on rare findings and new sites?
-    - How much do multimodal (image, EHR and report) and longitudinal (prior exam) information add, and
-      how robust is that gain to missing data?
-    - Which quantization and distillation strategies compress medical VLMs and SLMs without loss in accuracy,
-      calibration and worst-subgroup performance?
+    - Can harmonisation or domain-invariant representations remove sensor and site effects without removing
+      task-relevant detail?
+    - Can flow-matching generators produce faithful 2D and 3D data that improves performance on rare classes
+      and new domains?
+    - How much do multimodal and temporal information add, and how robust is that gain to missing data?
+    - Do tool-using VLM agents stay grounded and calibrated under shift, and can they be quantized or
+      distilled without loss?
   - heading: Plan
     list:
-    - 'Year 1: a multi-vendor, multi-site benchmark with subgroup reporting; image harmonisation versus
-      representation-level device unlearning.'
-    - 'Year 2: 2D and 3D flow-matching synthesis with structural constraints; low-sample learning curves
+    - 'Year 1: multi-domain benchmark with worst-domain reporting; harmonisation versus representation-level
+      unlearning (medical first, then satellite imagery).'
+    - 'Year 2: 2D and 3D flow-matching synthesis with structural constraints; few-label learning curves
       combining PEFT, prototypes and synthetic data.'
-    - 'Year 3: multimodal and longitudinal models; quantized and distilled VLM/SLM deployment, evaluated
-      beyond accuracy.'
+    - 'Year 3: multimodal and temporal models; VLM agents and their quantized and distilled versions,
+      evaluated beyond accuracy on edge hardware.'
   - heading: Expected outcomes
     list:
     - Open benchmarks and evaluation protocols that report worst-subgroup and external performance.
     - Harmonisation and generation methods validated on downstream clinical tasks, not only image similarity.
     - Compressed medical models that run on modest hardware with documented, measured trade-offs.
 research_direction:
-  title: Medical imaging models that survive the move from the lab to the clinic
-  intro: My mammography papers ended with the same three problems. Performance dropped on a different
-    scanner (Planmed vs Siemens) and in dense breasts. The best model changed when the dataset or the
-    label definition changed. And the rare, borderline cases (BI-RADS 3 and 4) were exactly where there
-    was too little data. I want my PhD to work on these problems directly. That means making models robust
-    to acquisition shift, creating trustworthy training data where real data is scarce, using all of a
-    patient's information over time, and making the resulting models small enough to run where they are
-    needed.
+  title: Vision and multimodal AI that holds up outside the lab
+  intro: 'Models trained on one dataset are increasingly deployed somewhere else: a different hospital
+    scanner, a different satellite sensor or season, a different camera, city or weather. In my own medical
+    imaging work I saw what happens then. Accuracy dropped on a new device and on the hardest cases, the
+    best model changed when the dataset changed, and the rare cases had the least data. These problems
+    are not specific to mammography. They also hold back remote sensing, security and surveillance, and
+    autonomous driving. I want my PhD to address them generally: models that are robust to domain shift,
+    that learn from synthetic and scarce data, that use several modalities over time, and that are small
+    and reliable enough to run on real devices, including as the perception layer of agentic AI systems.'
+  domains:
+  - name: Medical imaging
+    text: scanner and site shift, rare findings, 2D and 3D scans, prior exams and patient records
+  - name: Remote sensing
+    text: sensor, season and region shift, optical and SAR fusion, satellite time series, few labels
+  - name: Security and surveillance
+    text: camera, lighting and viewpoint shift, rare events, privacy-preserving on-device models
+  - name: Autonomous systems
+    text: weather and city shift, camera and LiDAR fusion, 3D scenes, real-time edge inference
   pipeline:
   - stage: Data
     items:
-    - Harmonise images across scanners and sites
+    - Harmonise across sensors, sites and conditions
     - Generate 2D and 3D data with flow matching
-    - Learn from few labelled samples
+    - Learn from few labels
   - stage: Modelling
     items:
-    - Fuse images, records and reports
-    - Use prior exams and patient history over time
+    - Fuse images, text, records and other sensors
+    - Model change over time (prior exams, image time series, video)
   - stage: Deployment
     items:
-    - Vision-language and small language models
+    - Vision-language models and agents
     - Near-lossless quantization and distillation
-    - Evaluate worst subgroups, not just averages
+    - Report worst-case performance, not just averages
   themes:
   - id: harmonisation
     title: Domain shift and harmonisation
-    summary: Make models give the same answer for the same anatomy, whichever scanner, vendor or site
-      produced the image.
-    why: In my IEEE Access study, five-class BI-RADS F1 was 0.36–0.47 on Planmed images but 0.54–0.57
-      on Siemens Mammomat. In the foundation-model study, the configuration ranking changed between VinDr-Mammo,
-      INbreast and LUMINA. Aggregate metrics hid both effects.
+    summary: The same scene should get the same answer, whichever scanner, satellite, camera or site captured
+      it.
+    why: In my IEEE Access study, five-class BI-RADS F1 was 0.36–0.47 on one mammography vendor and 0.54–0.57
+      on another. In my foundation-model study, the ranking of eight models changed across three datasets.
+      Benchmarks such as WILDS show the same pattern across very different fields, including satellite
+      imagery.
     questions:
-    - Can image-level harmonisation remove vendor appearance without removing diagnostic signal such as
-      calcifications and fine texture?
-    - Is it better to harmonise the images, or to make the representation invariant, for example by unlearning
-      device information?
-    - 'How should harmonisation be validated: by image similarity, by downstream performance, or by worst-subgroup
-      performance?'
+    - When is it better to harmonise the input images, and when to make the learned representation invariant
+      (for example by unlearning sensor or site information)?
+    - Can harmonisation remove acquisition style without removing fine diagnostic or semantic detail?
+    - 'Which evaluation actually predicts deployment performance: image similarity, average accuracy,
+      or worst-domain accuracy?'
     approach:
-    - Build a multi-vendor mammography benchmark from public datasets, stratified by device, density and
-      finding type.
-    - Compare disentanglement-based harmonisation (in the style of HACA3 for MRI) with flow-matching image
-      translation and representation-level device unlearning.
-    - Measure success as the reduction in the gap between the best and worst device, with calibration
-      reported alongside accuracy.
-    status: 'Started: preliminary harmonisation models improve on the unharmonised baseline, and device
-      unlearning is implemented.'
+    - 'Multi-domain benchmarks with held-out sensors or sites: mammography vendors first, then satellite
+      sensors and regions.'
+    - Compare disentanglement-based harmonisation (in the style of HACA3), flow-matching image translation
+      and representation-level unlearning.
+    - Report the gap between the best and worst domain, with calibration alongside accuracy.
+    status: 'Started: harmonisation models beat the unharmonised baseline on mammography, and device unlearning
+      is implemented.'
     refs:
+    - wilds
     - haca3
   - id: synthesis
-    title: Synthetic data generation in 2D and 3D with flow matching
-    summary: Generate images and volumes that are faithful to the anatomy, as training data and as a stress
-      test for rare and borderline cases.
-    why: I tried lesion synthesis on VinDr-Mammo with LoRA-adapted latent-diffusion inpainting, and it
-      did not improve downstream performance. Natural-image priors favour seamless blending over diagnostically
-      faithful structure. That result led me to flow matching, which learns straighter transport paths
-      and samples in far fewer steps, and which I now use for H&E-to-IHC virtual staining.
+    title: Synthetic data in 2D and 3D with flow matching
+    summary: Generate faithful images, volumes and scenes to cover rare cases and to stress-test models
+      before deployment.
+    why: My lesion-synthesis experiment with latent-diffusion inpainting did not help downstream performance,
+      because natural-image priors produce plausible-looking rather than faithful structure. That led
+      me to flow matching, which learns straighter transport paths and samples in far fewer steps. I now
+      use it for virtual staining of pathology slides. 3D generators such as MAISI-v2 are adopting rectified
+      flow for the same reasons.
     questions:
-    - Can frequency-domain or anatomy-aware constraints make generated lesions and stains diagnostically
-      faithful rather than just realistic-looking?
-    - Does 3D generation (CT, MRI, digital breast tomosynthesis) with latent flow matching keep structure
-      consistent across slices at a usable cost?
-    - When does synthetic data actually help, and how do we detect when it teaches the model shortcuts?
+    - Can structural constraints (frequency-domain, masks, geometry) make generated data faithful enough
+      to train on?
+    - Does latent flow matching scale to 3D medical volumes, multi-band satellite imagery and 3D driving
+      scenes at practical cost?
+    - When does synthetic data help, and how do we detect when it teaches shortcuts or memorises training
+      data?
     approach:
-    - Conditional flow matching in 2D (mammography, pathology) with frequency-domain and mask-based constraints.
-    - Extend to 3D with latent rectified-flow models, building on open frameworks such as MAISI and MAISI-v2.
-    - Evaluate with downstream tasks on external data, with reader studies of realism, and with tests
-      for memorisation of training images.
+    - Conditional flow matching in 2D (mammography, pathology, satellite tiles) with structural constraints.
+    - Latent rectified-flow models for 3D volumes and scenes, building on open frameworks such as MAISI.
+    - Judge synthetic data by downstream performance on held-out domains, plus memorisation tests.
     status: 'Ongoing: H&E-to-IHC virtual staining with flow matching, currently above the baseline.'
     refs:
     - lipman
@@ -876,92 +893,101 @@ research_direction:
     - maisi2
   - id: lowsample
     title: Learning from few samples
-    summary: Make rare findings and small hospitals first-class citizens, rather than noise in a large
-      dataset.
-    why: In VinDr-Mammo, BI-RADS 5 has 83 training breasts against 4,824 for BI-RADS 1. My clinically
-      grounded prototypes added little on the training distribution, but improved external macro-F1 by
-      up to 0.095. In the foundation-model study, a frozen DINOv2 backbone with a few routed LoRA experts
-      reached 0.878 AUC while training only a small fraction of the parameters.
+    summary: Rare findings, rare events and new deployment sites should not need thousands of new labels.
+    why: In VinDr-Mammo, the most severe category has 83 training breasts against 4,824 normal ones. Clinically
+      grounded prototypes improved external macro-F1 by up to 0.095, and a frozen DINOv2 with a few routed
+      LoRA experts reached 0.878 AUC while training a small fraction of the parameters. Foundation models
+      for Earth observation, such as Prithvi and SatMAE, raise the same question for remote sensing.
     questions:
-    - How few labelled examples are needed when a foundation model is adapted with parameter-efficient
-      methods and clinical structure (prototypes, ordinal labels)?
-    - Can synthetic data from theme 2 replace or complement real examples of rare findings, and by how
-      much?
-    - Can a model adapt to a new site from a handful of unlabelled or weakly labelled images?
+    - How few labels are needed when a foundation model is adapted with parameter-efficient methods and
+      domain structure (prototypes, ordinal labels)?
+    - Can synthetic data replace or complement real examples of rare classes, and by how much?
+    - Can a model adapt to a new site or sensor from a handful of unlabelled images?
     approach:
-    - Learning curves with 1–100% of the labels, comparing PEFT, prototype learning and synthetic augmentation
+    - Learning curves from 1% to 100% of labels, comparing PEFT, prototype learning and synthetic augmentation
       on the same splits.
-    - Few-shot site adaptation, evaluated on the held-out vendors from theme 1.
-    status: Builds directly on both mammography papers.
+    - Few-shot adaptation to held-out domains from theme 1, in medical and satellite imagery.
+    status: Builds directly on both of my mammography papers.
     refs:
     - dinov2
     - lora
+    - satmae
+    - prithvi
   - id: multimodal
-    title: 'Multimodal learning: images, records and reports'
-    summary: Use everything a clinician looks at, not just the image.
-    why: At Klarity I build risk models from EHR, insurance and clinical data. My imaging models use only
-      pixels. A screening decision combines both, plus the radiology report. I have also fine-tuned BLIP
-      and CLIP for chest X-ray report generation.
+    title: Multimodal and temporal modelling
+    summary: Combine everything available, including images, text, records and other sensors, and how
+      it changes over time.
+    why: At Klarity I model longitudinal EHR data with irregular follow-up, while my imaging models see
+      only pixels at one time point. Radiologists compare with prior exams; remote sensing relies on time
+      series and on optical and SAR fusion; driving relies on camera, LiDAR and radar. Risk models such
+      as Mirai still predict from a single exam.
     questions:
-    - How should imaging features be fused with tabular EHR data that is irregular and has missing values?
-    - Do reports, used as weak supervision at training time, improve image models that run without text
-      at test time?
-    - Can the explanation say which modality drove the decision?
+    - How should images be fused with other modalities that are irregular, missing or misaligned?
+    - Does explicitly modelling change over time (prior exams, satellite time series, video) beat treating
+      each time point separately?
+    - Can the model tell us which modality and which time point drove the decision?
     approach:
-    - Late and cross-attention fusion of image embeddings with EHR encoders, robust to missing modalities.
-    - Report-supervised pretraining, evaluated on image-only external tests.
-    status: Planned. The building blocks come from my EHR and VLM work.
-    refs:
-    - llavamed
-    - medgemma
-  - id: longitudinal
-    title: Longitudinal modelling with prior exams and patient history
-    summary: Model how a patient changes over time, which is how radiologists actually read.
-    why: Radiologists compare a mammogram with prior exams, and risk evolves over years. Risk models such
-      as Mirai predict future risk from the current screening exam. My Klarity work models chronic disease
-      and biological age on longitudinal records with irregular follow-up.
-    questions:
-    - Does explicitly modelling change between current and prior exams improve detection of early or interval
-      cancers?
-    - How should irregular time gaps, and missing or extra priors, be handled?
-    - Can longitudinal imaging and longitudinal EHR be modelled jointly for short-term risk prediction?
-    approach:
-    - Registration-free change modelling between current and prior exams, with time-aware attention.
-    - Joint image–EHR sequence models, evaluated by time horizon and by subgroup.
-    status: Planned. It connects my thesis with my industry work on longitudinal EHR.
+    - Cross-attention fusion that is robust to missing modalities, tested on image and EHR data and on
+      multi-sensor data (nuScenes-style camera and LiDAR).
+    - Time-aware models for change detection, with irregular time gaps handled explicitly.
+    status: Planned. It connects my imaging thesis with my longitudinal EHR work.
     refs:
     - mirai
-  - id: efficient
-    title: Vision-language and small language models, compressed without loss
-    summary: Bring medical VLMs and small language models to hospitals with limited hardware, without
-      losing what makes them safe.
-    why: Medical VLMs such as LLaVA-Med and MedGemma are large. Many hospitals, including in countries
-      like Pakistan, cannot run them. I have fine-tuned quantized LLMs with QLoRA for Urdu summarisation,
-      and worked on LLM unlearning (SemEval-2025). Compression is usually reported as an accuracy drop,
-      but recent work shows that quantization also changes calibration, and that matters in clinical use.
+    - nuscenes
+  - id: vlm-agents
+    title: Vision-language models and agentic AI
+    summary: Use VLMs not only to describe images but as the perception and reasoning core of agents that
+      plan, use tools and check themselves.
+    why: 'VLMs are moving into every one of these domains: LLaVA-Med and MedGemma in medicine, DriveLM
+      in autonomous driving, and geospatial assistants in remote sensing. Agent frameworks such as ReAct
+      let a model reason, call tools (a segmenter, a detector, a database) and act on the results. I have
+      fine-tuned BLIP and CLIP for report generation and worked on LLM unlearning. What is missing is
+      evidence that these systems stay grounded and calibrated under the domain shifts in theme 1.'
     questions:
-    - What does lossless compression mean for a clinical model? I would define it as no significant change
-      in accuracy, calibration, worst-subgroup performance or hallucination rate.
-    - Which combination of post-training quantization (GPTQ, AWQ, 8-bit and 4-bit) and knowledge distillation
-      into a small language or vision-language model meets that definition?
-    - Can distillation transfer the teacher's uncertainty and grounding, not just its answers?
+    - Does a VLM agent that calls specialised vision tools (detection, segmentation, change detection)
+      beat a single end-to-end VLM, and is it more robust to shift?
+    - How can an agent know when it is out of distribution and should defer to a human?
+    - How do we measure hallucination and grounding in images, not only in text?
     approach:
-    - 'A benchmark of quantized and distilled medical VLMs and SLMs, measured beyond accuracy: calibration,
-      subgroup gaps, hallucination and grounding.'
-    - Calibration- and subgroup-aware quantization, and distillation objectives that match teacher uncertainty.
-    - Deployment tests on CPU and edge hardware.
-    status: Planned. It builds on my QLoRA and LLM-unlearning work.
+    - Tool-using VLM agents for structured image analysis, such as screening triage and satellite change
+      reports, evaluated on held-out domains.
+    - Uncertainty-aware deferral, with evaluation of grounding and hallucination.
+    status: Planned. It builds on my VLM fine-tuning and LLM work.
     refs:
     - llavamed
     - medgemma
+    - drivelm
+    - react
+  - id: efficient
+    title: 'Small models: quantization and knowledge distillation without loss'
+    summary: 'Run VLMs and small language models on the hardware that is actually available: hospital
+      workstations, drones, vehicles and cameras.'
+    why: The strongest VLMs are large, while many deployments are on edge devices or in low-resource settings.
+      I have fine-tuned quantized LLMs with QLoRA for Urdu summarisation. Compression is usually reported
+      as an accuracy drop, but recent work shows that quantization also changes calibration, which matters
+      whenever a model's confidence drives a decision.
+    questions:
+    - What should lossless mean? I would define it as no significant change in accuracy, calibration,
+      worst-domain performance or hallucination rate.
+    - Which combination of post-training quantization (GPTQ, AWQ, 8-bit and 4-bit) and knowledge distillation
+      into small vision-language or language models meets that bar?
+    - Can distillation transfer the teacher's uncertainty and grounding, not only its answers?
+    approach:
+    - A benchmark of quantized and distilled VLMs and SLMs, measured beyond accuracy, in medical and non-medical
+      domains.
+    - Calibration- and domain-aware quantization, and distillation objectives that match the teacher's
+      uncertainty.
+    - Latency and memory tests on CPU and edge hardware.
+    status: Planned. It builds on my QLoRA and LLM-unlearning work.
+    refs:
     - gptq
     - awq
     - qlora
     - kd
     - quant_reliab
   principles:
-  - Report worst-subgroup and external performance alongside averages, with confidence intervals.
-  - Treat negative results, such as my inpainting experiment, as findings and report them.
+  - Report worst-domain and external performance next to averages, with confidence intervals.
+  - Report negative results, such as my inpainting experiment, as findings.
   - Release code and evaluation protocols so that results can be checked.
   references:
     haca3:
@@ -1022,3 +1048,23 @@ research_direction:
       text: 'Bouguerra et al. Less precise can be more reliable: a systematic evaluation of quantization''s
         impact on VLMs beyond accuracy. ICML, 2026.'
       url: https://arxiv.org/abs/2509.21173
+    wilds:
+      text: 'Koh et al. WILDS: a benchmark of in-the-wild distribution shifts. ICML, 2021.'
+      url: https://arxiv.org/abs/2012.07421
+    satmae:
+      text: 'Cong et al. SatMAE: pre-training transformers for temporal and multi-spectral satellite imagery.
+        NeurIPS, 2022.'
+      url: https://arxiv.org/abs/2207.08051
+    prithvi:
+      text: Jakubik et al. Foundation models for generalist geospatial artificial intelligence (Prithvi).
+        arXiv, 2023.
+      url: https://arxiv.org/abs/2310.18660
+    nuscenes:
+      text: 'Caesar et al. nuScenes: a multimodal dataset for autonomous driving. CVPR, 2020.'
+      url: https://arxiv.org/abs/1903.11027
+    drivelm:
+      text: 'Sima et al. DriveLM: driving with graph visual question answering. ECCV, 2024.'
+      url: https://arxiv.org/abs/2312.14150
+    react:
+      text: 'Yao et al. ReAct: synergizing reasoning and acting in language models. ICLR, 2023.'
+      url: https://arxiv.org/abs/2210.03629

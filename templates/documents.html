@@ -2,11 +2,11 @@
 {% block title %}Documents | {{ site.profile.name }}{% endblock %}
 {% block content %}
 <h1>Documents</h1>
-{% if share or is_admin %}
-<p>All documents are available below{% if share %} through your private link{% endif %}. Each opens in the browser and can be downloaded.</p>
+{% set any_private = site.documents|selectattr('visibility', 'equalto', 'private')|list %}
+{% if not any_private or share or is_admin %}
+<p>Each document opens in the browser and can be downloaded.</p>
 {% else %}
-<p>My CV is public. Transcripts and degree certificates are shared with supervisors and admissions committees on request.
-  <a href="{{ url_for('contact') }}?kind=PhD+position">Ask for access</a> and I'll send you a private link.</p>
+<p>Some documents are shared on request. <a href="{{ url_for('contact') }}?kind=PhD+position">Ask for access</a> and I'll send you a private link.</p>
 {% endif %}
 
 <ul class="doclist">

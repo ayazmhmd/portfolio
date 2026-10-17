@@ -443,7 +443,7 @@ def profile():
         f = request.form
         pr, ct = data.setdefault("profile", {}), data.setdefault("contact", {})
         files = {}
-        for k in ("name", "title", "location", "status"):
+        for k in ("name", "title", "location", "status", "dob", "nationality"):
             pr[k] = f.get(k, "").strip()
         pr["bio"] = [b.strip().replace("\n", " ") for b in f.get("bio", "").replace("\r\n", "\n").split("\n\n") if b.strip()]
         pr["interests"] = [t.strip() for t in f.get("interests", "").split(",") if t.strip()]
