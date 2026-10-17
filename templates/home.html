@@ -37,12 +37,13 @@
 <h2>Selected research</h2>
 {% for p in site.projects if p.status != 'in_progress' %}{{ entry(p) }}{% endfor %}
 
-{% set rd = site.research_direction %}
-{% if rd %}
-<h2>Research direction</h2>
-<p>{{ rd.intro|truncate(330) }} <a href="{{ url_for('direction') }}">Read more</a>.</p>
+{% set ri = site.research_interests %}
+{% if ri %}
+<h2>Research interests</h2>
+<ul class="tagline">{% for a in ri.areas if a.title != 'Applications' %}<li>{{ a.title }}</li>{% endfor %}</ul>
+<p>Five research topics I would like to pursue in a PhD:</p>
 <ol class="themes-short">
-  {% for t in rd.themes %}<li><a href="{{ url_for('direction') }}#{{ t.id }}">{{ t.title }}</a>. <span class="muted">{{ t.summary }}</span></li>{% endfor %}
+  {% for t in ri.topics %}<li><a href="{{ url_for('interests') }}#{{ t.id }}">{{ t.title }}</a></li>{% endfor %}
 </ol>
 {% endif %}
 

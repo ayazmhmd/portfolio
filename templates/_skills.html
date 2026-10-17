@@ -1,0 +1,10 @@
+{% macro skills_block(skills) %}
+<div class="skills">
+  {% for s in skills %}
+  <div class="skillrow">
+    <div class="skarea">{{ s.area }}</div>
+    <ul class="chips">{% for it in s['items'] %}<li>{{ it }}</li>{% endfor %}</ul>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}

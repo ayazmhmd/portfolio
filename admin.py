@@ -32,8 +32,8 @@ YAML_SECTIONS = {
     "experience": "Experience (research & industry)",
     "references": "References",
     "other_projects": "Other projects",
-    "research_direction": "Research direction page",
-    "proposal": "Research proposal page",
+    "research_interests": "Research interests page (areas, proposed topics)",
+    "skills": "Skills",
 }
 DEFAULT_PASSWORD = "change-me"
 
@@ -499,12 +499,6 @@ def section(key):
             flash(f"Not saved, the text has a formatting error: {e}", "error")
             return render_template("admin/section.html", key=key, text=text)
         files = {}
-        up = request.files.get("pdf")
-        if key == "proposal" and up and up.filename:
-            name, blob = process_upload(up, {"pdf"}, folder_names(store.PUBLIC_FILES))
-            if name:
-                files[f"{store.PUBLIC_FILES}/{name}"] = blob
-                data[key]["pdf"] = f"files/{name}"
         save(data, f"Update {YAML_SECTIONS[key]}", files)
         return redirect(url_for("admin.section", key=key))
     return render_template("admin/section.html", key=key, text=text)

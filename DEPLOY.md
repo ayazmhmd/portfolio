@@ -72,7 +72,7 @@ The admin panel needs permission to save into this one repository.
 | Upload a motivation letter, certificate or new CV | Admin → Documents → Add a document |
 | Make a document public or private | Admin → Documents → tick or untick **Public** |
 | Give a supervisor access to transcripts, degree and reference emails | Admin → Documents → Private links → **Create link**, then paste the link into your email |
-| Edit references, education, proposal, future work | Admin → Other pages |
+| Edit references, education, research interests, skills | Admin → Other pages |
 | Read contact-form messages | Admin → Messages (or the Issues tab on GitHub) |
 
 ### Limits to know about

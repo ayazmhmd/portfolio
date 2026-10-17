@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% from "_skills.html" import skills_block %}
+{% block title %}Research interests | {{ site.profile.name }}{% endblock %}
+{% block content %}
+{% set ri = site.research_interests %}
+<h1>{{ ri.title }}</h1>
+{% for p in ri.intro %}<p class="{{ 'lead' if loop.first }}">{{ p }}</p>{% endfor %}
+
+<nav class="pagetoc">
+  <a href="#areas">Areas</a><a href="#topics">Proposed research topics</a><a href="#skills">Skills</a><a href="#references">References</a>
+</nav>
+
+<h2 id="areas">Areas I work in and want to work in</h2>
+<div class="areas">
+  {% for a in ri.areas %}
+  <div class="area">
+    <b>{{ a.title }}</b>
+    <p>{{ a.text }}</p>
+    {% if a.experience %}<p class="exp"><span>Experience</span>{{ a.experience }}</p>{% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+{% set refnum = {} %}
+{% for t in ri.topics %}{% for r in t.refs or [] %}{% if r not in refnum %}{% set _ = refnum.update({r: refnum|length + 1}) %}{% endif %}{% endfor %}{% endfor %}
+
+<h2 id="topics">Proposed research topics</h2>
+<p class="muted">Five directions I would like to pursue in a PhD, each building on work I have already done. They are starting points, and I'm glad to adapt them to a group's focus.</p>
+<ol class="topic-toc">
+  {% for t in ri.topics %}<li><a href="#{{ t.id }}">{{ t.title }}</a></li>{% endfor %}
+</ol>
+
+{% for t in ri.topics %}
+<article class="topic" id="{{ t.id }}">
+  <p class="tlabel">Topic {{ loop.index }}</p>
+  <h3>{{ t.title }}</h3>
+  {% if t.keywords %}<ul class="chips small">{% for k in t.keywords %}<li>{{ k }}</li>{% endfor %}</ul>{% endif %}
+  <p class="abstract-label">Abstract</p>
+  <p class="tabstract">{{ t.abstract }}</p>
+  {% if t.builds_on %}<p class="builds"><b>Builds on my work:</b> {{ t.builds_on }}</p>{% endif %}
+  {% if t.refs %}<p class="trefs">Key references: {% for r in t.refs %}<a href="#ref-{{ r }}">[{{ refnum[r] }}]</a> {% endfor %}</p>{% endif %}
+</article>
+{% endfor %}
+
+{% if site.skills %}
+<h2 id="skills">Skills</h2>
+{{ skills_block(site.skills) }}
+{% endif %}
+
+<p class="ask">If your group works on any of these topics, I'd be glad to <a href="{{ url_for('contact') }}?kind=PhD+position">hear from you</a>.</p>
+
+{% if ri.references %}
+<h2 id="references">References</h2>
+<ol class="refs">
+  {% for key, n in refnum|dictsort(by='value') %}{% set r = ri.references[key] %}
+  <li id="ref-{{ key }}" value="{{ n }}">{{ r.text }} {% if r.url %}<a href="{{ r.url }}">link</a>{% endif %}</li>
+  {% endfor %}
+</ol>
+{% endif %}
+{% endblock %}

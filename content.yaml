@@ -1,12 +1,13 @@
 # Site content. Edit from /admin or by hand.
 profile:
   name: Ayaz Mehmood
-  title: AI researcher · computer vision, generative and multimodal models · MS Data Science, NUST
+  title: AI researcher · domain adaptation, synthetic data, multimodal and foundation models · MS Data
+    Science, NUST
   location: Islamabad, Pakistan
   photo: img/ayaz_mehmood.jpg
-  status: 'I am looking for a fully funded PhD position in computer vision and multimodal AI: robustness
-    to domain shift, synthetic data, and efficient vision-language models, applied to medical imaging
-    and beyond.'
+  status: 'I am looking for a fully funded PhD position in AI: domain adaptation, synthetic data generation,
+    multimodal learning, foundation models and vision-language models, applied to medical imaging and
+    beyond.'
   bio:
   - I work on medical imaging models that hold up outside the dataset they were trained on. My MS thesis
     at NUST, supervised by Dr. M. Daud Abdullah Asif, studied breast-level classification from dual-view
@@ -23,12 +24,13 @@ profile:
     to deploy) are the same in remote sensing, security and autonomous systems, and I am keen to work
     on them there too.
   interests:
-  - domain shift and harmonisation
-  - synthetic data generation (2D and 3D, flow matching)
-  - learning from few samples
-  - multimodal and temporal modelling
-  - vision-language models and agentic AI
+  - vision-language models (image and video)
+  - large and small language models
+  - multimodal learning
+  - low-resource and low-data modelling
   - quantization and knowledge distillation
+  - domain adaptation
+  - synthetic data (2D and 3D)
   cv_pdf: files/Ayaz_Mehmood_CV.pdf
   dob: 4 May 2000
   nationality: Pakistani
@@ -110,10 +112,13 @@ references:
   role: Master's thesis supervisor
   org: School of Electrical Engineering and Computer Science (SEECS), NUST, Islamabad
   email: daud.abdullah@seecs.edu.pk
+  show_email: true
 - name: Dr. Kashif Ahmad
   role: Research collaborator
   org: Munster Technological University (MTU), Ireland
   email: kashif.ahmad@mtu.ie
+  show_email: true
+  email_alt: kahmad0512@gmail.com
 documents:
 - id: cv
   title: Curriculum vitae
@@ -766,234 +771,219 @@ other_projects:
   lesion segmentation (U-Net, DeepLabV3, TransViT); ECG arrhythmia detection
 - Flux fine-tuning for logo generation, virtual try-on/try-off with Stable Diffusion, face unmasking with
   Pix2Pix GAN
-proposal:
-  title: Robust, data-efficient and deployable vision and multimodal models
-  status: This is a draft. I'm happy to shape it around the direction of the group I join.
-  pdf: ''
-  sections:
-  - heading: Motivation
-    text: Vision models are usually trained on one dataset and reported on its test split, then deployed
-      on different sensors, sites and conditions. In my medical imaging experiments, the same models lost
-      accuracy on another vendor, in harder subgroups and on rare categories, and the best model changed
-      with the dataset. The same failure modes limit remote sensing, security and autonomous systems,
-      and the settings with the least data and hardware are the least served.
-  - heading: Aim
-    text: To develop and evaluate methods that keep vision and vision-language models accurate and calibrated
-      under domain shift and data scarcity, using multimodal and temporal information, and to compress
-      them for edge deployment without measurable loss. Medical imaging is the primary testbed, with transfer
-      to remote sensing or autonomous driving.
-  - heading: Research questions
-    list:
-    - Can harmonisation or domain-invariant representations remove sensor and site effects without removing
-      task-relevant detail?
-    - Can flow-matching generators produce faithful 2D and 3D data that improves performance on rare classes
-      and new domains?
-    - How much do multimodal and temporal information add, and how robust is that gain to missing data?
-    - Do tool-using VLM agents stay grounded and calibrated under shift, and can they be quantized or
-      distilled without loss?
-  - heading: Plan
-    list:
-    - 'Year 1: multi-domain benchmark with worst-domain reporting; harmonisation versus representation-level
-      unlearning (medical first, then satellite imagery).'
-    - 'Year 2: 2D and 3D flow-matching synthesis with structural constraints; few-label learning curves
-      combining PEFT, prototypes and synthetic data.'
-    - 'Year 3: multimodal and temporal models; VLM agents and their quantized and distilled versions,
-      evaluated beyond accuracy on edge hardware.'
-  - heading: Expected outcomes
-    list:
-    - Open benchmarks and evaluation protocols that report worst-subgroup and external performance.
-    - Harmonisation and generation methods validated on downstream clinical tasks, not only image similarity.
-    - Compressed medical models that run on modest hardware with documented, measured trade-offs.
-research_direction:
-  title: Vision and multimodal AI that holds up outside the lab
-  intro: 'Models trained on one dataset are increasingly deployed somewhere else: a different hospital
-    scanner, a different satellite sensor or season, a different camera, city or weather. In my own medical
-    imaging work I saw what happens then. Accuracy dropped on a new device and on the hardest cases, the
-    best model changed when the dataset changed, and the rare cases had the least data. These problems
-    are not specific to mammography. They also hold back remote sensing, security and surveillance, and
-    autonomous driving. I want my PhD to address them generally: models that are robust to domain shift,
-    that learn from synthetic and scarce data, that use several modalities over time, and that are small
-    and reliable enough to run on real devices, including as the perception layer of agentic AI systems.'
-  domains:
-  - name: Medical imaging
-    text: scanner and site shift, rare findings, 2D and 3D scans, prior exams and patient records
-  - name: Remote sensing
-    text: sensor, season and region shift, optical and SAR fusion, satellite time series, few labels
-  - name: Security and surveillance
-    text: camera, lighting and viewpoint shift, rare events, privacy-preserving on-device models
-  - name: Autonomous systems
-    text: weather and city shift, camera and LiDAR fusion, 3D scenes, real-time edge inference
-  pipeline:
-  - stage: Data
-    items:
-    - Harmonise across sensors, sites and conditions
-    - Generate 2D and 3D data with flow matching
-    - Learn from few labels
-  - stage: Modelling
-    items:
-    - Fuse images, text, records and other sensors
-    - Model change over time (prior exams, image time series, video)
-  - stage: Deployment
-    items:
-    - Vision-language models and agents
-    - Near-lossless quantization and distillation
-    - Report worst-case performance, not just averages
-  themes:
-  - id: harmonisation
-    title: Domain shift and harmonisation
-    summary: The same scene should get the same answer, whichever scanner, satellite, camera or site captured
-      it.
-    why: In my IEEE Access study, five-class BI-RADS F1 was 0.36–0.47 on one mammography vendor and 0.54–0.57
-      on another. In my foundation-model study, the ranking of eight models changed across three datasets.
-      Benchmarks such as WILDS show the same pattern across very different fields, including satellite
-      imagery.
-    questions:
-    - When is it better to harmonise the input images, and when to make the learned representation invariant
-      (for example by unlearning sensor or site information)?
-    - Can harmonisation remove acquisition style without removing fine diagnostic or semantic detail?
-    - 'Which evaluation actually predicts deployment performance: image similarity, average accuracy,
-      or worst-domain accuracy?'
-    approach:
-    - 'Multi-domain benchmarks with held-out sensors or sites: mammography vendors first, then satellite
-      sensors and regions.'
-    - Compare disentanglement-based harmonisation (in the style of HACA3), flow-matching image translation
-      and representation-level unlearning.
-    - Report the gap between the best and worst domain, with calibration alongside accuracy.
-    status: 'Started: harmonisation models beat the unharmonised baseline on mammography, and device unlearning
-      is implemented.'
+research_interests:
+  title: Research interests
+  intro:
+  - 'Most of my research so far is in medical imaging: breast-level mammogram classification with multi-view
+    fusion and prototype learning, adapting the DINOv2 foundation model with routed low-rank experts,
+    virtual staining of pathology slides with flow matching, and clinical risk models on longitudinal
+    health records. Across that work I kept meeting the same obstacles. Models lose accuracy on a new
+    scanner or site, labelled data is scarce for the cases that matter most, and the strongest models
+    are too large for the hardware most hospitals have.'
+  - For my PhD I want to work on these obstacles more broadly, with medical imaging as my home ground
+    but not my only one. I am especially interested in vision-language models (including video), large
+    and small language models, multimodal learning, and making all of these work in low-resource and low-data
+    settings through domain adaptation, synthetic data, quantization and distillation.
+  areas:
+  - title: Vision-language models, including video
+    text: Grounded image and video understanding, report generation, and efficient handling of many frames.
+    experience: Fine-tuned BLIP and CLIP for chest X-ray report generation.
+  - title: Large and small language models
+    text: Parameter-efficient fine-tuning, unlearning, and compact models that run on modest hardware.
+    experience: QLoRA fine-tuning of Llama 2/3, Mistral and Falcon for Urdu; SemEval-2025 LLM unlearning;
+      RAG systems.
+  - title: Multimodal learning
+    text: Combining images, text, clinical records and other sensors, robust to missing modalities.
+    experience: Dual-view image fusion; EHR, longitudinal and insurance data at Klarity.
+  - title: Low-resource and low-data modelling
+    text: Learning from few labels, little compute and under-served languages.
+    experience: LoRA experts on a frozen DINOv2; prototypes for rare BI-RADS classes; Urdu summarisation.
+  - title: Quantization and knowledge distillation
+    text: Compressing models without losing accuracy, calibration or worst-case performance.
+    experience: 4-bit quantized fine-tuning (QLoRA); parameter-efficient adaptation.
+  - title: Domain adaptation and robustness
+    text: Keeping performance when the scanner, site, sensor or conditions change.
+    experience: External validation and per-device analysis in both mammography papers; device unlearning;
+      harmonisation.
+  - title: Generative models and synthetic data
+    text: Flow matching and diffusion for 2D and 3D data that is faithful, not just realistic.
+    experience: H&E-to-IHC virtual staining with flow matching; latent-diffusion inpainting; Stable Diffusion
+      and Flux.
+  - title: Applications
+    text: Medical imaging first (mammography, pathology, chest X-ray, brain MRI), and also remote sensing,
+      security and autonomous driving, which share the same problems.
+    experience: Medical imaging since 2022 at NCAI, NUST and Klarity.
+  topics:
+  - id: domain-adaptation
+    title: 'Source-free and test-time domain adaptation across scanners and sensors: from multi-vendor
+      mammography to autonomous driving'
+    abstract: 'Medical imaging models are trained on data from a few scanners and deployed on others.
+      In my IEEE Access study, five-class BI-RADS macro-F1 was 0.36–0.47 on one mammography vendor and
+      0.54–0.57 on another, and in my foundation-model study the best of eight models changed across three
+      datasets. Autonomous driving faces the same problem with weather, cities and sensors, and has developed
+      a rich toolbox: adversarial entropy minimisation (ADVENT), transformer self-training (DAFormer),
+      and test-time adaptation that updates a model during deployment without source data (TENT, CoTTA).
+      Work on domain adaptation for mammography is much younger. This project would bring these methods
+      to breast-level, dual-view mammography, where adaptation is harder: lesions are tiny, classes are
+      extremely imbalanced, and adaptation must not erase the rare abnormal cases. I propose source-free
+      and test-time adaptation that updates only normalisation layers or low-rank adapters, anchored by
+      class prototypes (from my prototype-learning work) to prevent collapse onto the majority class.
+      It would be combined with image harmonisation and evaluated leave-one-vendor-out on public mammography
+      datasets (VinDr-Mammo, INbreast, CMMD, LUMINA), reporting worst-vendor performance and calibration.
+      As a test of generality, the same method would be applied to a driving benchmark with adverse-weather
+      shift.'
+    keywords:
+    - unsupervised domain adaptation
+    - test-time adaptation
+    - mammography
+    - autonomous driving
+    builds_on: External validation and per-device analysis in both mammography papers; device unlearning
+      (ongoing).
     refs:
+    - advent
+    - daformer
+    - tent
+    - cotta
+    - uda_norway
+    - uda_calc
     - wilds
-    - haca3
-  - id: synthesis
-    title: Synthetic data in 2D and 3D with flow matching
-    summary: Generate faithful images, volumes and scenes to cover rare cases and to stress-test models
-      before deployment.
-    why: My lesion-synthesis experiment with latent-diffusion inpainting did not help downstream performance,
-      because natural-image priors produce plausible-looking rather than faithful structure. That led
-      me to flow matching, which learns straighter transport paths and samples in far fewer steps. I now
-      use it for virtual staining of pathology slides. 3D generators such as MAISI-v2 are adopting rectified
-      flow for the same reasons.
-    questions:
-    - Can structural constraints (frequency-domain, masks, geometry) make generated data faithful enough
-      to train on?
-    - Does latent flow matching scale to 3D medical volumes, multi-band satellite imagery and 3D driving
-      scenes at practical cost?
-    - When does synthetic data help, and how do we detect when it teaches shortcuts or memorises training
-      data?
-    approach:
-    - Conditional flow matching in 2D (mammography, pathology, satellite tiles) with structural constraints.
-    - Latent rectified-flow models for 3D volumes and scenes, building on open frameworks such as MAISI.
-    - Judge synthetic data by downstream performance on held-out domains, plus memorisation tests.
-    status: 'Ongoing: H&E-to-IHC virtual staining with flow matching, currently above the baseline.'
+  - id: synthetic-data
+    title: Structure-preserving synthetic data in 2D and 3D with flow matching
+    abstract: 'Synthetic data can cover rare findings and new domains, but only if it is faithful to the
+      anatomy. My attempt at lesion synthesis on VinDr-Mammo with LoRA-adapted latent-diffusion inpainting
+      did not improve downstream performance: natural-image priors favour seamless blending over diagnostically
+      faithful structure. Flow matching and rectified flow learn straighter transport between distributions,
+      sample in few steps, and are now used for 3D medical volumes (MAISI-v2). I currently use flow matching
+      for H&E-to-IHC virtual staining, with results above the baseline. This project would develop conditional
+      flow-matching generators with structural constraints (masks, frequency-domain losses, anatomical
+      priors) for 2D data (mammography, pathology, chest X-ray) and 3D data (brain MRI, as in my tumour
+      and Alzheimer''s projects, CT volumes and breast tomosynthesis), working in a learned latent space
+      to keep 3D generation affordable. Two uses are studied: augmenting rare classes, and translating
+      images into the style of an unseen scanner as a bridge for domain adaptation (topic 1). Synthetic
+      data would be judged by what matters, namely downstream performance on external data, together with
+      expert realism ratings and tests for memorisation of training images.'
+    keywords:
+    - flow matching
+    - rectified flow
+    - 3D generation
+    - virtual staining
+    - data augmentation
+    builds_on: H&E-to-IHC virtual staining (ongoing); the negative result with latent-diffusion inpainting.
     refs:
     - lipman
     - rectflow
     - fm_med
     - maisi
     - maisi2
-  - id: lowsample
-    title: Learning from few samples
-    summary: Rare findings, rare events and new deployment sites should not need thousands of new labels.
-    why: In VinDr-Mammo, the most severe category has 83 training breasts against 4,824 normal ones. Clinically
-      grounded prototypes improved external macro-F1 by up to 0.095, and a frozen DINOv2 with a few routed
-      LoRA experts reached 0.878 AUC while training a small fraction of the parameters. Foundation models
-      for Earth observation, such as Prithvi and SatMAE, raise the same question for remote sensing.
-    questions:
-    - How few labels are needed when a foundation model is adapted with parameter-efficient methods and
-      domain structure (prototypes, ordinal labels)?
-    - Can synthetic data replace or complement real examples of rare classes, and by how much?
-    - Can a model adapt to a new site or sensor from a handful of unlabelled images?
-    approach:
-    - Learning curves from 1% to 100% of labels, comparing PEFT, prototype learning and synthetic augmentation
-      on the same splits.
-    - Few-shot adaptation to held-out domains from theme 1, in medical and satellite imagery.
-    status: Builds directly on both of my mammography papers.
-    refs:
-    - dinov2
-    - lora
-    - satmae
-    - prithvi
-  - id: multimodal
-    title: Multimodal and temporal modelling
-    summary: Combine everything available, including images, text, records and other sensors, and how
-      it changes over time.
-    why: At Klarity I model longitudinal EHR data with irregular follow-up, while my imaging models see
-      only pixels at one time point. Radiologists compare with prior exams; remote sensing relies on time
-      series and on optical and SAR fusion; driving relies on camera, LiDAR and radar. Risk models such
-      as Mirai still predict from a single exam.
-    questions:
-    - How should images be fused with other modalities that are irregular, missing or misaligned?
-    - Does explicitly modelling change over time (prior exams, satellite time series, video) beat treating
-      each time point separately?
-    - Can the model tell us which modality and which time point drove the decision?
-    approach:
-    - Cross-attention fusion that is robust to missing modalities, tested on image and EHR data and on
-      multi-sensor data (nuScenes-style camera and LiDAR).
-    - Time-aware models for change detection, with irregular time gaps handled explicitly.
-    status: Planned. It connects my imaging thesis with my longitudinal EHR work.
-    refs:
-    - mirai
-    - nuscenes
-  - id: vlm-agents
-    title: Vision-language models and agentic AI
-    summary: Use VLMs not only to describe images but as the perception and reasoning core of agents that
-      plan, use tools and check themselves.
-    why: 'VLMs are moving into every one of these domains: LLaVA-Med and MedGemma in medicine, DriveLM
-      in autonomous driving, and geospatial assistants in remote sensing. Agent frameworks such as ReAct
-      let a model reason, call tools (a segmenter, a detector, a database) and act on the results. I have
-      fine-tuned BLIP and CLIP for report generation and worked on LLM unlearning. What is missing is
-      evidence that these systems stay grounded and calibrated under the domain shifts in theme 1.'
-    questions:
-    - Does a VLM agent that calls specialised vision tools (detection, segmentation, change detection)
-      beat a single end-to-end VLM, and is it more robust to shift?
-    - How can an agent know when it is out of distribution and should defer to a human?
-    - How do we measure hallucination and grounding in images, not only in text?
-    approach:
-    - Tool-using VLM agents for structured image analysis, such as screening triage and satellite change
-      reports, evaluated on held-out domains.
-    - Uncertainty-aware deferral, with evaluation of grounding and hallucination.
-    status: Planned. It builds on my VLM fine-tuning and LLM work.
-    refs:
-    - llavamed
-    - medgemma
-    - drivelm
-    - react
-  - id: efficient
-    title: 'Small models: quantization and knowledge distillation without loss'
-    summary: 'Run VLMs and small language models on the hardware that is actually available: hospital
-      workstations, drones, vehicles and cameras.'
-    why: The strongest VLMs are large, while many deployments are on edge devices or in low-resource settings.
-      I have fine-tuned quantized LLMs with QLoRA for Urdu summarisation. Compression is usually reported
-      as an accuracy drop, but recent work shows that quantization also changes calibration, which matters
-      whenever a model's confidence drives a decision.
-    questions:
-    - What should lossless mean? I would define it as no significant change in accuracy, calibration,
-      worst-domain performance or hallucination rate.
-    - Which combination of post-training quantization (GPTQ, AWQ, 8-bit and 4-bit) and knowledge distillation
-      into small vision-language or language models meets that bar?
-    - Can distillation transfer the teacher's uncertainty and grounding, not only its answers?
-    approach:
-    - A benchmark of quantized and distilled VLMs and SLMs, measured beyond accuracy, in medical and non-medical
-      domains.
-    - Calibration- and domain-aware quantization, and distillation objectives that match the teacher's
-      uncertainty.
-    - Latency and memory tests on CPU and edge hardware.
-    status: Planned. It builds on my QLoRA and LLM-unlearning work.
+  - id: lossless-quantization
+    title: Towards lossless quantization of medical vision and vision-language models
+    abstract: 'Post-training quantization (GPTQ, AWQ) and outlier-aware schemes such as SpQR compress
+      large models to 3–4 bits with near-lossless perplexity. In medicine, ''no loss'' must mean more
+      than unchanged average accuracy. Decisions depend on calibrated confidence and on the rare, hard
+      subgroups, and recent work shows that quantization changes calibration in vision-language models.
+      This project would define lossless operationally: no statistically significant change in accuracy,
+      calibration error, worst-subgroup performance or hallucination rate. It would then search for compression
+      that meets this definition. Planned methods include sensitivity-guided mixed precision that keeps
+      the most sensitive weights (often in the vision encoder and cross-modal projector) at higher precision;
+      calibration-aware objectives during quantization; and a short low-rank recovery step in the spirit
+      of QLoRA, which I have used for Urdu summarisation. Models range from mammography classifiers to
+      medical VLMs and small language models, measured on CPU and edge hardware for latency and memory.
+      The output is both a method and an open evaluation protocol for clinical compression.'
+    keywords:
+    - post-training quantization
+    - mixed precision
+    - calibration
+    - edge deployment
+    builds_on: QLoRA 4-bit fine-tuning of Llama, Mistral and Falcon; calibration (ECE) analysis in my
+      mammography work.
     refs:
     - gptq
     - awq
+    - spqr
     - qlora
-    - kd
     - quant_reliab
-  principles:
-  - Report worst-domain and external performance next to averages, with confidence intervals.
-  - Report negative results, such as my inpainting experiment, as findings.
-  - Release code and evaluation protocols so that results can be checked.
+  - id: ensemble-distillation
+    title: 'Ensemble foundation-model distillation: one compact student that beats its teachers where
+      it matters'
+    abstract: No single foundation model is best everywhere. In my MammoRLE-MIL study, the configuration
+      with the best internal AUC was not the best on INbreast or LUMINA. General models (DINOv2, CLIP-style
+      encoders, SAM) and domain-specific medical models each capture different evidence. Ensembles of
+      them are accurate and better calibrated, but far too expensive to deploy. Multi-teacher distillation
+      offers a way out. AM-RADIO distils CLIP, DINOv2 and SAM into a single backbone, and Pathryoshka
+      compresses several pathology foundation models into a student 86–92% smaller that matches them.
+      This project would distil an ensemble of general and medical foundation models into one compact
+      student for medical imaging. A per-sample router, related to the routed low-rank experts I used
+      in MammoRLE-MIL, weights each teacher by its reliability on that input. The student is trained to
+      reproduce not only the teachers' features and predictions but also their disagreement, as a signal
+      for uncertainty and calibration. The student would then be quantized (topic 3) and tested internally,
+      externally and per subgroup. The aim is a model that is smaller than any teacher, while matching
+      or beating the ensemble on worst-domain performance.
+    keywords:
+    - knowledge distillation
+    - multi-teacher
+    - foundation models
+    - ensembles
+    - calibration
+    builds_on: 'MammoRLE-MIL: routed low-rank experts on DINOv2, evaluated on three datasets.'
+    refs:
+    - kd
+    - radio
+    - pathryoshka
+    - dinov2
+  - id: small-vlms
+    title: Small, grounded vision-language models for medical images and video
+    abstract: 'Medical VLMs such as LLaVA-Med and MedGemma show that one model can answer questions and
+      draft reports across imaging modalities, but they are large. Video makes this harder, because the
+      cost of video VLMs such as Video-ChatGPT grows with the number of frames. Training-free token compression
+      (DyCoke) and small language models that run on a phone (Phi-3) suggest a different design point:
+      a compact VLM that keeps only the visual evidence it needs. This project would build such models
+      by distilling a large medical VLM teacher into a small language model with compressed visual tokens,
+      using distillation objectives designed for generative models (MiniLLM). Target tasks are image-level
+      (findings and report drafting for mammography and chest X-ray) and video-level, such as ultrasound
+      and endoscopy clips. The focus is on grounding: answers must point to the image region or video
+      segment that supports them, and the model should defer when unsure. Hallucination, grounding accuracy
+      and calibration are measured alongside task accuracy, including for reports in low-resource languages
+      such as Urdu.'
+    keywords:
+    - vision-language models
+    - video VLMs
+    - small language models
+    - token compression
+    - grounding
+    builds_on: BLIP and CLIP report generation for chest X-rays; QLoRA LLM fine-tuning for Urdu; LLM unlearning.
+    refs:
+    - llavamed
+    - medgemma
+    - videochatgpt
+    - dycoke
+    - phi3
+    - minillm
   references:
-    haca3:
-      text: 'Zuo et al. HACA3: A unified approach for multi-site MR image harmonization. Computerized
-        Medical Imaging and Graphics, 2023.'
-      url: https://arxiv.org/abs/2212.06065
+    advent:
+      text: 'Vu et al. ADVENT: adversarial entropy minimization for domain adaptation in semantic segmentation.
+        CVPR, 2019.'
+      url: https://arxiv.org/abs/1811.12833
+    daformer:
+      text: 'Hoyer, Dai, Van Gool. DAFormer: improving network architectures and training strategies for
+        domain-adaptive semantic segmentation. CVPR, 2022.'
+      url: https://arxiv.org/abs/2111.14887
+    tent:
+      text: 'Wang et al. Tent: fully test-time adaptation by entropy minimization. ICLR, 2021.'
+      url: https://arxiv.org/abs/2006.10726
+    cotta:
+      text: Wang et al. Continual test-time domain adaptation. CVPR, 2022.
+      url: https://arxiv.org/abs/2203.13591
+    uda_norway:
+      text: 'Unsupervised domain adaptation for breast cancer detection in a multi-scanner environment:
+        a case-study from Norway. Springer, 2025.'
+      url: https://link.springer.com/chapter/10.1007/978-3-031-95838-0_35
+    uda_calc:
+      text: Unsupervised domain adaptation for calcification classification in mammography across multi-site
+        datasets. arXiv, 2026.
+      url: https://arxiv.org/abs/2607.06549
+    wilds:
+      text: 'Koh et al. WILDS: a benchmark of in-the-wild distribution shifts. ICML, 2021.'
+      url: https://arxiv.org/abs/2012.07421
     lipman:
       text: Lipman et al. Flow matching for generative modeling. ICLR, 2023.
       url: https://arxiv.org/abs/2210.02747
@@ -1012,23 +1002,6 @@ research_direction:
       text: 'Zhao et al. MAISI-v2: accelerated 3D high-resolution medical image synthesis with rectified
         flow. arXiv, 2025.'
       url: https://arxiv.org/abs/2508.05772
-    dinov2:
-      text: 'Oquab et al. DINOv2: learning robust visual features without supervision. TMLR, 2024.'
-      url: https://arxiv.org/abs/2304.07193
-    lora:
-      text: 'Hu et al. LoRA: low-rank adaptation of large language models. ICLR, 2022.'
-      url: https://arxiv.org/abs/2106.09685
-    llavamed:
-      text: 'Li et al. LLaVA-Med: training a large language-and-vision assistant for biomedicine in one
-        day. NeurIPS Datasets and Benchmarks, 2023.'
-      url: https://arxiv.org/abs/2306.00890
-    medgemma:
-      text: Sellergren et al. MedGemma technical report. arXiv, 2025.
-      url: https://arxiv.org/abs/2507.05201
-    mirai:
-      text: Yala et al. Toward robust mammography-based models for breast cancer risk. Science Translational
-        Medicine, 2021.
-      url: https://doi.org/10.1126/scitranslmed.aba4373
     gptq:
       text: 'Frantar et al. GPTQ: accurate post-training quantization for generative pre-trained transformers.
         ICLR, 2023.'
@@ -1037,34 +1010,108 @@ research_direction:
       text: 'Lin et al. AWQ: activation-aware weight quantization for LLM compression and acceleration.
         MLSys, 2024.'
       url: https://arxiv.org/abs/2306.00978
+    spqr:
+      text: 'Dettmers et al. SpQR: a sparse-quantized representation for near-lossless LLM weight compression.
+        ICLR, 2024.'
+      url: https://arxiv.org/abs/2306.03078
     qlora:
       text: 'Dettmers et al. QLoRA: efficient finetuning of quantized LLMs. NeurIPS, 2023.'
       url: https://arxiv.org/abs/2305.14314
-    kd:
-      text: Hinton, Vinyals, Dean. Distilling the knowledge in a neural network. NeurIPS Deep Learning
-        Workshop, 2015.
-      url: https://arxiv.org/abs/1503.02531
     quant_reliab:
       text: 'Bouguerra et al. Less precise can be more reliable: a systematic evaluation of quantization''s
         impact on VLMs beyond accuracy. ICML, 2026.'
       url: https://arxiv.org/abs/2509.21173
-    wilds:
-      text: 'Koh et al. WILDS: a benchmark of in-the-wild distribution shifts. ICML, 2021.'
-      url: https://arxiv.org/abs/2012.07421
-    satmae:
-      text: 'Cong et al. SatMAE: pre-training transformers for temporal and multi-spectral satellite imagery.
-        NeurIPS, 2022.'
-      url: https://arxiv.org/abs/2207.08051
-    prithvi:
-      text: Jakubik et al. Foundation models for generalist geospatial artificial intelligence (Prithvi).
-        arXiv, 2023.
-      url: https://arxiv.org/abs/2310.18660
-    nuscenes:
-      text: 'Caesar et al. nuScenes: a multimodal dataset for autonomous driving. CVPR, 2020.'
-      url: https://arxiv.org/abs/1903.11027
-    drivelm:
-      text: 'Sima et al. DriveLM: driving with graph visual question answering. ECCV, 2024.'
-      url: https://arxiv.org/abs/2312.14150
-    react:
-      text: 'Yao et al. ReAct: synergizing reasoning and acting in language models. ICLR, 2023.'
-      url: https://arxiv.org/abs/2210.03629
+    kd:
+      text: Hinton, Vinyals, Dean. Distilling the knowledge in a neural network. NeurIPS Deep Learning
+        Workshop, 2015.
+      url: https://arxiv.org/abs/1503.02531
+    radio:
+      text: 'Ranzinger et al. AM-RADIO: agglomerative vision foundation model, reduce all domains into
+        one. CVPR, 2024.'
+      url: https://arxiv.org/abs/2312.06709
+    pathryoshka:
+      text: 'Grashei et al. Pathryoshka: compressing pathology foundation models via multi-teacher knowledge
+        distillation with nested embeddings. arXiv, 2025.'
+      url: https://arxiv.org/abs/2511.23204
+    dinov2:
+      text: 'Oquab et al. DINOv2: learning robust visual features without supervision. TMLR, 2024.'
+      url: https://arxiv.org/abs/2304.07193
+    minillm:
+      text: 'Gu et al. MiniLLM: knowledge distillation of large language models. ICLR, 2024.'
+      url: https://arxiv.org/abs/2306.08543
+    llavamed:
+      text: 'Li et al. LLaVA-Med: training a large language-and-vision assistant for biomedicine in one
+        day. NeurIPS Datasets and Benchmarks, 2023.'
+      url: https://arxiv.org/abs/2306.00890
+    medgemma:
+      text: Sellergren et al. MedGemma technical report. arXiv, 2025.
+      url: https://arxiv.org/abs/2507.05201
+    videochatgpt:
+      text: 'Maaz et al. Video-ChatGPT: towards detailed video understanding via large vision and language
+        models. ACL, 2024.'
+      url: https://arxiv.org/abs/2306.05424
+    dycoke:
+      text: 'Tao et al. DyCoke: dynamic compression of tokens for fast video large language models. CVPR,
+        2025.'
+      url: https://openaccess.thecvf.com/content/CVPR2025/html/Tao_DyCoke_Dynamic_Compression_of_Tokens_for_Fast_Video_Large_Language_CVPR_2025_paper.html
+    phi3:
+      text: 'Abdin et al. Phi-3 technical report: a highly capable language model locally on your phone.
+        arXiv, 2024.'
+      url: https://arxiv.org/abs/2404.14219
+skills:
+- area: Medical imaging and computer vision
+  items:
+  - CNNs and Vision Transformers
+  - DINOv2 and foundation-model adaptation
+  - multi-view fusion
+  - classification, detection, segmentation (YOLO, U-Net, DeepLabV3)
+  - DICOM
+  - multiple instance learning
+  - external and stratified validation
+- area: Vision-language and language models
+  items:
+  - CLIP and BLIP
+  - LLMs (Llama 2/3, Mistral, Falcon)
+  - RAG and LangChain
+  - function calling
+  - LLM unlearning
+  - report generation and summarisation
+- area: Efficient and low-resource AI
+  items:
+  - LoRA, QLoRA and PEFT
+  - mixture of low-rank experts
+  - 4-bit and 8-bit quantized fine-tuning
+  - low-resource language NLP (Urdu)
+- area: Generative models
+  items:
+  - flow matching
+  - diffusion models and inpainting
+  - virtual stain translation
+  - Stable Diffusion and Flux
+  - GANs (Pix2Pix)
+- area: Explainability and evaluation
+  items:
+  - prototype learning
+  - Grad-CAM and saliency
+  - calibration (ECE)
+  - bootstrap confidence intervals
+  - DeLong and McNemar tests
+  - subgroup and failure analysis
+- area: Clinical and tabular data
+  items:
+  - EHR / EMR
+  - longitudinal and irregular follow-up data
+  - risk and survival modelling
+  - insurance data
+  - ECG signals
+- area: Engineering
+  items:
+  - Python
+  - PyTorch
+  - SQL
+  - Git
+  - Docker
+  - Linux
+  - HPC and cloud GPUs
+  - Flask APIs
+  - AWS SageMaker

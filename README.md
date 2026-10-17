@@ -1,7 +1,7 @@
 # Ayaz Mehmood: research portfolio (Flask)
 
 Pages: home · research (one page per paper, with figures that enlarge on click, result
-tables and key numbers) · future work · proposal · CV · documents (public CV; private
+tables and key numbers) · research interests (areas, proposed topics, skills) · CV · documents (public CV; private
 transcripts and degree behind share links) · contact.
 
 - **Put it online:** see [DEPLOY.md](DEPLOY.md) (Vercel + GitHub, free).

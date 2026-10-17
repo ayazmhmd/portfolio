@@ -32,9 +32,8 @@
   {% for r in site.references %}
   <dt>{{ r.role }}</dt>
   <dd><b>{{ r.name }}</b>, {{ r.org }}
-    {% if (share or is_admin) and r.email %}<br><a href="mailto:{{ r.email }}">{{ r.email }}</a>{% endif %}</dd>
+    {% if r.email %}<br><a href="mailto:{{ r.email }}">{{ r.email }}</a>{% endif %}{% if r.email_alt %} · <a href="mailto:{{ r.email_alt }}">{{ r.email_alt }}</a>{% endif %}</dd>
   {% endfor %}
 </dl>
-{% if not (share or is_admin) %}<p class="muted small">Contact details for references are included with the private link.</p>{% endif %}
 {% endif %}
 {% endblock %}

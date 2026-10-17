@@ -156,19 +156,16 @@ def about_redirect():
     return redirect(url_for("cv"), 301)
 
 
+@app.route("/research-interests")
+def interests():
+    return render_template("interests.html")
+
+
 @app.route("/research-direction")
-def direction():
-    return render_template("direction.html")
-
-
 @app.route("/future-work")
-def future_work_redirect():
-    return redirect(url_for("direction"), 301)
-
-
 @app.route("/proposal")
-def proposal():
-    return render_template("proposal.html")
+def old_interest_pages():
+    return redirect(url_for("interests"), 301)
 
 
 # ------------------------------------------------------------------ documents
